@@ -6,101 +6,120 @@
     <title>FotosDeLucha | Kevin Puelles</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        html { scroll-behavior: smooth; }
-        .gallery-container {
-            column-count: 1;
-            column-gap: 1.5rem;
-        }
-        @media (min-width: 768px) { .gallery-container { column-count: 2; } }
-        .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-        .gallery-item img {
-            transition: transform 0.5s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.03);
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #fff; }
+        .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
+        
+        /* Animación de entrada para las fotos */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        #mobile-menu { display: none; }
+        #mobile-menu.active { display: flex; }
     </style>
 </head>
-<body class="bg-white text-zinc-900 font-light">
+<body class="text-zinc-900 overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-xs uppercase tracking-[0.2em] flex items-center gap-2 hover:text-orange-600 transition">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al inicio
-            </a>
-            <h1 class="text-sm font-bold tracking-tighter uppercase tracking-widest">FotosDeLucha</h1>
+    <nav class="fixed w-full z-50 bg-white/95 border-b border-zinc-100 px-6 py-5">
+        <div class="max-w-[1800px] mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
+            <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
+                <a href="index.html" class="hover:text-black transition">Inicio</a>
+                <a href="portafolio.html" class="text-black font-bold">Portafolio</a>
+                <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
+                <a href="contacto.html" class="hover:text-black transition">Contacto</a>
+            </div>
+            <button class="md:hidden text-black" onclick="toggleMenu()">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
     </nav>
 
-    <header class="pt-32 pb-16 px-6">
-        <div class="max-w-4xl mx-auto">
-            <span class="text-orange-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Investigación Visual / Documental</span>
-            <h2 class="text-5xl font-light mb-8 text-zinc-900">FotosDeLucha</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs border-t border-zinc-100 pt-8">
-                <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Proyecto</h4>
-                    <p>Iniciativa Social</p>
-                </div>
-                <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Registro</h4>
-                    <p>16 Provincias</p>
-                </div>
-                <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Alcance</h4>
-                    <p>+500 días</p>
-                </div>
-                <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Enlace</h4>
-                    <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="text-orange-600 hover:underline">Instagram</a>
-                </div>
+    <header class="pt-40 pb-24 px-6 max-w-5xl mx-auto">
+        <a href="portafolio.html" class="text-zinc-400 hover:text-black transition text-[10px] uppercase tracking-[0.3em] flex items-center gap-2 mb-12">
+            <i data-lucide="arrow-left" class="w-3 h-3"></i> Volver al portafolio
+        </a>
+        <h1 class="font-roboto-black text-6xl md:text-8xl uppercase tracking-tighter leading-none mb-8">
+            FotosDeLucha
+        </h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
+            <div class="md:col-span-2">
+                <p class="text-xl md:text-2xl font-light leading-relaxed text-zinc-600">
+                    Este ensayo documenta el estallido social y los procesos de movilización popular en el Perú desde finales de 2022. A través de una mirada honesta y cercana, busco registrar no solo la confrontación, sino la dignidad y la organización de quienes demandan justicia.
+                </p>
+            </div>
+            <div class="text-[11px] uppercase tracking-widest space-y-4 border-l border-zinc-100 pl-8">
+                <div><span class="text-zinc-400 block mb-1">Localización</span> Perú (Lima, Ayacucho, Puno)</div>
+                <div><span class="text-zinc-400 block mb-1">Periodo</span> 2022 — 2026</div>
+                <div><span class="text-zinc-400 block mb-1">Formato</span> Digital / Blanco y Negro</div>
             </div>
         </div>
     </header>
 
-    <section class="px-6 pb-24">
-        <div class="max-w-6xl mx-auto">
-            
-            <div class="max-w-4xl mb-20 space-y-6 text-zinc-600 text-lg leading-relaxed text-justify">
-                <p>
-                    En diciembre de 2022, fundé <span class="text-black font-medium">Fotosdelucha</span>, una iniciativa autogestionada nacida en las calles para registrar y difundir el proceso popular peruano desde el punto de vista de quienes se movilizan.
-                </p>
-                <p>
-                    A la fecha cuenta con más de <span class="text-black">500 días de registro en al menos 16 provincias del país</span>, y se sostiene con el apoyo de personas que se identifican con el proyecto y gracias a los cuales se han realizado cerca de 20 viajes principalmente hacia el sur peruano para rescatar la memoria de nuestro proceso, complementándose así con el registro hecho en Lima.
-                </p>
-                <p>
-                    Parte del archivo se ha publicado como un <span class="text-black font-medium">fotolibro</span> y una exhibición fotográfica itinerante que sirven como herramientas de sensibilización, difusión y cambio.
-                </p>
+    <main class="space-y-24 md:space-y-40 pb-40">
+        
+        <section class="reveal px-4 md:px-0">
+            <div class="max-w-[1400px] mx-auto">
+                <img src="img/portfolio-018.jpg" class="w-full h-auto" alt="Marchas en Lima">
+                <p class="text-[10px] uppercase tracking-widest text-zinc-400 mt-4 px-2 md:px-0">Centro Histórico de Lima. La resistencia en las calles.</p>
             </div>
+        </section>
 
-            <div class="gallery-container">
-                <div class="gallery-item"><img src="img/portfolio-018.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-001.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-002.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-003.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-009.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-010.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-011.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
-                <div class="gallery-item"><img src="img/portfolio-013.jpg" alt="Fotos de Lucha" class="w-full h-auto bg-zinc-100"></div>
+        <section class="reveal max-w-3xl mx-auto px-6 text-center">
+            <h3 class="font-roboto-black text-2xl uppercase mb-6 tracking-tight">"La cámara es un testigo, pero también una herramienta de memoria."</h3>
+            <p class="text-zinc-500 font-light leading-relaxed italic">
+                En el fragor de la protesta, el encuadre se vuelve un acto político. Cada rostro capturado es una historia de lucha que se niega a ser borrada por el tiempo oficial.
+            </p>
+        </section>
+
+        <section class="reveal px-6">
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                <img src="img/portfolio-001C.webp" class="w-full h-full object-cover" alt="Detalle de lucha 1">
+                <img src="img/portfolio-002C.webp" class="w-full h-full object-cover" alt="Detalle de lucha 2">
             </div>
+        </section>
 
+        <section class="reveal px-6">
+            <div class="max-w-3xl mx-auto">
+                <img src="img/portfolio-023.webp" class="w-full h-auto" alt="Retrato documental">
+                <p class="text-[10px] uppercase tracking-widest text-zinc-400 mt-6 text-center italic">Retrato de la memoria colectiva.</p>
+            </div>
+        </section>
+
+        <section class="reveal px-4 md:px-0">
+            <div class="max-w-[1400px] mx-auto">
+                <img src="img/portfolio-021.webp" class="w-full h-auto" alt="Fuerza social">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-24 text-center px-6 border-t border-zinc-50 bg-zinc-50">
+        <div class="flex flex-col items-center gap-6">
+            <p class="font-roboto-black text-2xl uppercase tracking-tighter">¿Te interesa profundizar en esta historia?</p>
+            <a href="contacto.html" class="bg-black text-white text-[11px] uppercase tracking-[0.2em] font-bold px-12 py-4 hover:bg-zinc-800 transition">Contactar para exhibición</a>
+            <a href="portafolio.html" class="text-zinc-400 text-[10px] uppercase tracking-widest hover:text-black transition mt-4">Ver otros proyectos</a>
         </div>
-    </section>
-
-    <footer class="py-24 border-t border-zinc-100 text-center">
-        <p class="text-zinc-400 text-xs uppercase tracking-[0.3em] mb-8">Kevin Puelles • 2026</p>
-        <a href="index.html#portafolio" class="px-10 py-4 border border-zinc-900 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition duration-500">
-            Volver al Portafolio
-        </a>
     </footer>
 
     <script>
         lucide.createIcons();
+        
+        // Función para el efecto reveal al hacer scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Ejecutar al inicio por si ya hay elementos visibles
     </script>
 </body>
 </html>
