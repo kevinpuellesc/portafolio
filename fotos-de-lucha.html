@@ -11,15 +11,16 @@
         body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
         .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
         
+        /* Animación de revelado */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Corrección Menú Móvil */
-        #mobile-menu { display: none; }
-        #mobile-menu.active { display: flex; }
+        /* Ajustes de imagen */
+        img { width: 100%; height: auto; display: block; }
 
-        /* Ajuste de imágenes para que no tengan márgenes extraños en móvil */
-        img { max-width: 100%; height: auto; display: block; }
+        /* Prevenir saltos visuales en el menú móvil */
+        #mobile-overlay.hidden { display: none; }
+        #mobile-overlay.flex { display: flex; }
     </style>
 </head>
 <body class="text-zinc-900 overflow-x-hidden">
@@ -30,43 +31,40 @@
             
             <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
                 <a href="index.html" class="hover:text-black transition">Inicio</a>
-                <a href="portafolio.html" class="text-black font-bold">Portafolio</a>
+                <a href="portafolio.html" class="text-black font-bold border-b border-black pb-1">Portafolio</a>
                 <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
 
-            <button class="md:hidden text-black block p-2" onclick="toggleMenu()" aria-label="Abrir menú">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            <button class="md:hidden text-black block z-[120] p-2" onclick="toggleMenu()" id="menu-toggle">
+                <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
             </button>
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-[110] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
-        <button class="absolute top-6 right-6 p-2" onclick="toggleMenu()">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
+    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[110] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
         <a href="index.html" onclick="toggleMenu()" class="font-light">Inicio</a>
         <a href="portafolio.html" onclick="toggleMenu()" class="font-bold">Portafolio</a>
         <a href="sobre-mi.html" onclick="toggleMenu()" class="font-light">Sobre mí</a>
         <a href="contacto.html" onclick="toggleMenu()" class="font-light">Contacto</a>
     </div>
 
-    <header class="pt-32 md:pt-40 pb-16 px-6 max-w-6xl mx-auto">
-        <a href="portafolio.html" class="text-zinc-400 hover:text-black transition text-[10px] uppercase tracking-[0.3em] flex items-center gap-2 mb-8 md:mb-12">
+    <header class="pt-32 md:pt-48 pb-16 md:pb-24 px-6 max-w-7xl mx-auto">
+        <a href="portafolio.html" class="text-zinc-400 hover:text-black transition text-[10px] uppercase tracking-[0.3em] flex items-center gap-2 mb-10 md:mb-16">
             <i data-lucide="arrow-left" class="w-3 h-3"></i> Volver al portafolio
         </a>
         
-        <h1 class="font-roboto-black text-5xl md:text-9xl uppercase tracking-tighter leading-[0.9] mb-8 break-words">
+        <h1 class="font-roboto-black text-5xl md:text-9xl uppercase tracking-tighter leading-[0.85] mb-8 break-words">
             FotosDeLucha
         </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12 md:mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 mt-12 md:mt-20">
             <div class="md:col-span-2">
                 <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600">
-                    Registro documental sobre los procesos sociales y expresiones populares en el Perú. Un testimonio visual que busca preservar la memoria de la movilización y la identidad colectiva.
+                    Registro documental sobre los procesos sociales y expresiones populares en el Perú. Un testimonio visual que busca preservar la memoria de la movilización y la identidad colectiva a través de la fotografía honesta.
                 </p>
             </div>
-            <div class="text-[11px] uppercase tracking-widest space-y-4 border-l border-zinc-100 pl-6 md:pl-8">
+            <div class="text-[11px] uppercase tracking-widest space-y-5 border-l border-zinc-100 pl-6 md:pl-10">
                 <div><span class="text-zinc-400 block mb-1">Localización</span> Perú</div>
                 <div><span class="text-zinc-400 block mb-1">Periodo</span> 2022 — Actualidad</div>
                 <div><span class="text-zinc-400 block mb-1">Formato</span> Digital</div>
@@ -74,59 +72,63 @@
         </div>
     </header>
 
-    <main class="space-y-16 md:space-y-32 pb-40">
+    <main class="space-y-20 md:space-y-40 pb-40">
         
         <section class="reveal px-4">
-            <div class="max-w-7xl mx-auto space-y-8 md:space-y-12">
-                <img src="img/Fotosdelucha-016.webp" alt="FotosDeLucha Principal 1">
-                <img src="img/Fotosdelucha-021.webp" alt="FotosDeLucha Principal 2">
+            <div class="max-w-[1400px] mx-auto space-y-12 md:space-y-24">
+                <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-016.webp?raw=true" alt="FotosDeLucha Principal 1">
+                <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-021.webp?raw=true" alt="FotosDeLucha Principal 2">
             </div>
         </section>
 
         <section class="reveal px-4">
-            <div class="max-w-7xl mx-auto space-y-8 md:space-y-12">
-                <img src="img/Fotosdelucha-010.webp" alt="FotosDeLucha Complemento 1">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <img src="img/Fotosdelucha-011.webp" alt="FotosDeLucha Complemento 2">
-                    <img src="img/Fotosdelucha-012.webp" alt="FotosDeLucha Complemento 3">
+            <div class="max-w-[1400px] mx-auto space-y-12 md:space-y-20">
+                <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-010.webp?raw=true" alt="FotosDeLucha Complementaria 1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-011.webp?raw=true" alt="FotosDeLucha Complementaria 2">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-012.webp?raw=true" alt="FotosDeLucha Complementaria 3">
                 </div>
             </div>
         </section>
 
-        <section class="reveal px-4 bg-zinc-50 py-16 md:py-24">
+        <section class="reveal px-4 bg-zinc-50 py-20 md:py-32">
             <div class="max-w-6xl mx-auto">
-                <h3 class="font-roboto-black text-lg md:text-2xl uppercase mb-8 md:mb-12 tracking-tight text-center italic text-zinc-400">Subsecuencia I</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                    <img src="img/Fotosdelucha-002.webp" alt="Subsecuencia 1-1">
-                    <img src="img/Fotosdelucha-003.webp" alt="Subsecuencia 1-2">
-                    <img src="img/Fotosdelucha-009.webp" alt="Subsecuencia 1-3">
-                    <img src="img/Fotosdelucha-015.webp" alt="Subsecuencia 1-4">
+                <div class="text-center mb-12 md:mb-20">
+                    <h3 class="font-roboto-black text-xl uppercase tracking-widest text-zinc-300 italic">Subsecuencia I</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-002.webp?raw=true" alt="S1-1">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-003.webp?raw=true" alt="S1-2">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-009.webp?raw=true" alt="S1-3">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-015.webp?raw=true" alt="S1-4">
                 </div>
             </div>
         </section>
 
         <section class="reveal px-4">
-            <div class="max-w-7xl mx-auto space-y-8 md:space-y-12">
-                <h3 class="font-roboto-black text-lg md:text-2xl uppercase mb-8 md:mb-12 tracking-tight text-center italic text-zinc-400">Subsecuencia II</h3>
-                <img src="img/Fotosdelucha-001.webp" alt="Subsecuencia 2-1">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <img src="img/Fotosdelucha-017.webp" alt="Subsecuencia 2-2">
-                    <img src="img/Fotosdelucha-019.webp" alt="Subsecuencia 2-3">
+            <div class="max-w-[1400px] mx-auto space-y-12 md:space-y-20">
+                <div class="text-center">
+                    <h3 class="font-roboto-black text-xl uppercase tracking-widest text-zinc-200 italic">Subsecuencia II</h3>
+                </div>
+                <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-001.webp?raw=true" alt="S2-1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-017.webp?raw=true" alt="S2-2">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-019.webp?raw=true" alt="S2-3">
                 </div>
             </div>
         </section>
 
-        <section class="reveal px-4 border-t border-zinc-100 pt-16 md:pt-24">
+        <section class="reveal px-4 border-t border-zinc-100 pt-20 md:pt-32">
             <div class="max-w-6xl mx-auto">
-                <div class="mb-12 md:mb-16 text-center">
+                <div class="mb-16 md:mb-24 text-center">
                     <h2 class="font-roboto-black text-3xl md:text-5xl uppercase tracking-tighter">Acción y Comunidad</h2>
-                    <p class="text-zinc-500 mt-2 md:mt-4 font-light italic">Exposiciones callejeras y talleres gratuitos.</p>
+                    <p class="text-zinc-500 mt-4 font-light italic">Exposiciones callejeras y talleres gratuitos en territorio.</p>
                 </div>
-                <div class="space-y-8 md:space-y-12">
-                    <img src="img/Fotosdelucha-004.webp" alt="Talleres 1">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                        <img src="img/Fotosdelucha-013.webp" alt="Talleres 2">
-                        <img src="img/Fotosdelucha-005.webp" alt="Talleres 3">
+                <div class="space-y-12 md:space-y-20">
+                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-004.webp?raw=true" alt="Talleres 1">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+                        <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-013.webp?raw=true" alt="Talleres 2">
+                        <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/Fotosdelucha-005.webp?raw=true" alt="Talleres 3">
                     </div>
                 </div>
             </div>
@@ -134,42 +136,55 @@
 
     </main>
 
-    <footer class="py-16 md:py-24 text-center px-6 border-t border-zinc-50 bg-white">
-        <div class="flex flex-col items-center gap-6">
-            <a href="contacto.html" class="bg-black text-white text-[11px] uppercase tracking-[0.2em] font-bold px-12 py-4 hover:bg-zinc-800 transition">Contactar para colaboración</a>
-            <p class="mt-8 md:mt-12 text-[9px] tracking-[0.5em] text-zinc-300 uppercase">© 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.</p>
+    <footer class="py-20 md:py-32 text-center px-6 border-t border-zinc-50 bg-white">
+        <div class="flex flex-col items-center gap-8">
+            <a href="contacto.html" class="bg-black text-white text-[11px] uppercase tracking-[0.2em] font-bold px-12 py-5 hover:bg-zinc-800 transition-all">
+                Contactar para colaboración
+            </a>
+            <p class="mt-12 text-[9px] tracking-[0.5em] text-zinc-300 uppercase">
+                © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
+            </p>
         </div>
     </footer>
 
     <script>
-        // Inicializar iconos
+        // Carga inicial de iconos
         lucide.createIcons();
 
-        // Función del menú corregida
+        // Función de Menú Hamburguesa Infalible
         function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
+            const overlay = document.getElementById('mobile-overlay');
+            const icon = document.getElementById('menu-icon');
+            const isHidden = overlay.classList.contains('hidden');
+
+            if (isHidden) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+                icon.setAttribute('data-lucide', 'x');
+                document.body.style.overflow = 'hidden'; // Bloquea scroll
             } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+                icon.setAttribute('data-lucide', 'menu');
+                document.body.style.overflow = 'auto'; // Habilita scroll
             }
+            lucide.createIcons(); // Re-renderiza el icono (X o Menu)
         }
 
-        // Scroll reveal
+        // Animación al hacer Scroll
         function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
+            const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal();
+        reveal(); // Chequeo inicial
     </script>
 </body>
 </html>
