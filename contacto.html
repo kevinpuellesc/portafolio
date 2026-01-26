@@ -14,14 +14,8 @@
         .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Control del Menú */
         #mobile-overlay.hidden { display: none; }
         #mobile-overlay.flex { display: flex; }
-        
-        /* Lógica de los iconos para que no fallen */
-        .icon-close { display: none; }
-        .menu-open .icon-hamburger { display: none; }
-        .menu-open .icon-close { display: block; }
 
         input, textarea {
             border: none;
@@ -57,18 +51,18 @@
                 <a href="contacto.html" class="text-black font-bold">Contacto</a>
             </div>
 
-            <button class="md:hidden text-black block z-[200] relative w-10 h-10" onclick="toggleMenu()" id="btn-toggle">
-                <div class="icon-hamburger absolute inset-0 flex items-center justify-center">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </div>
-                <div class="icon-close absolute inset-0 flex items-center justify-center">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </div>
+            <button class="md:hidden text-black block p-2" onclick="toggleMenu()" id="btn-open">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
 
     <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+        
+        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()" id="btn-close">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+
         <a href="index.html" onclick="toggleMenu()" class="font-light">Inicio</a>
         <a href="portafolio.html" onclick="toggleMenu()" class="font-light">Portafolio</a>
         <a href="sobre-mi.html" onclick="toggleMenu()" class="font-light">Sobre mí</a>
@@ -143,20 +137,16 @@
 
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
-            const body = document.body;
-            const btn = document.getElementById('btn-toggle');
             const isHidden = overlay.classList.contains('hidden');
 
             if (isHidden) {
                 overlay.classList.remove('hidden');
                 overlay.classList.add('flex');
-                body.classList.add('menu-open'); // Activa la X por CSS
-                body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden';
             } else {
                 overlay.classList.add('hidden');
                 overlay.classList.remove('flex');
-                body.classList.remove('menu-open'); // Activa la hamburguesa por CSS
-                body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto';
             }
         }
 
