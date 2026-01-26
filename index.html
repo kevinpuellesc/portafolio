@@ -35,30 +35,25 @@
             display: block;
         }
 
-        /* Bloques de texto adaptables */
+        /* Bloques de texto - Fondo Negro Siempre */
         .text-block-item {
+            background-color: #000;
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
             transition: all 0.3s ease;
-            /* Móvil: Menos alto y menos padding */
             min-height: 260px; 
             padding: 40px 30px;
         }
         
         @media (min-width: 768px) {
             .text-block-item {
-                /* Escritorio: Se mantiene imponente */
                 min-height: 380px;
                 padding: 60px 40px;
             }
         }
-        
-        /* Temas de color */
-        .theme-dark { background-color: #000; color: #fff; }
-        .theme-light { background-color: #fff; color: #000; border: 1px solid #f0f0f0; }
-        .theme-gray { background-color: #f4f4f5; color: #000; }
 
         .phrase-text {
             font-family: 'Roboto', sans-serif;
@@ -68,18 +63,19 @@
             margin-bottom: 25px;
         }
 
-        /* Botón Rectangular */
+        /* Botón Rectangular Blanco */
         .btn-rect {
+            background-color: #fff;
+            color: #000;
             padding: 12px 24px;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-weight: 700;
             display: inline-block;
+            transition: opacity 0.3s ease;
         }
-        .theme-dark .btn-rect { background-color: #fff; color: #000; }
-        .theme-light .btn-rect { background-color: #000; color: #fff; }
-        .theme-gray .btn-rect { background-color: #000; color: #fff; }
+        .btn-rect:hover { opacity: 0.9; }
 
         #mobile-menu { display: none; }
         #mobile-menu.active { display: flex; }
@@ -136,7 +132,7 @@
         const images = [
             "img/portfolio-018.jpg", "img/portfolio-003.webp", "img/portfolio-020.webp",
             "img/portfolio-005.webp", "img/portfolio-007.webp", "img/portfolio-008.webp",
-            "img/portfolio-011.webp", "img/portfolio-012.webp", "img/portfolio-021.webp",
+            "img/portfolio-012.webp", "img/portfolio-021.webp",
             "img/portfolio-014.webp", "img/portfolio-016.webp", "img/portfolio-022.webp",
             "img/portfolio-017.webp", "img/portfolio-023.webp", "img/portfolio-001C.webp",
             "img/portfolio-002C.webp", "img/portfolio-003C.webp", "img/portfolio-004C.webp",
@@ -157,12 +153,12 @@
             return array;
         }
 
-        const themes = ['theme-dark', 'theme-light', 'theme-gray'];
         let shuffledImages = shuffle([...images]);
         let shuffledPhrases = shuffle([...phrases]);
         
         let items = shuffledImages.map(img => ({ type: 'image', content: img }));
         
+        // Mantener las frases separadas al menos por 4 fotos
         let positions = [
             Math.floor(Math.random() * 3) + 1,
             Math.floor(Math.random() * 5) + 8,
@@ -183,9 +179,8 @@
             if (item.type === 'image') {
                 div.innerHTML = `<img src="${item.content}" alt="Kevin Puelles">`;
             } else {
-                const randomTheme = themes[Math.floor(Math.random() * themes.length)];
                 div.innerHTML = `
-                    <div class="text-block-item ${randomTheme}">
+                    <div class="text-block-item">
                         <p class="phrase-text text-2xl md:text-4xl">${item.content}</p>
                         <a href="portafolio.html" class="btn-rect">Ver portafolio</a>
                     </div>`;
