@@ -43,19 +43,21 @@
     <nav class="fixed w-full z-[100] bg-white/95 px-6 py-6">
         <div class="max-w-[1800px] mx-auto flex justify-between items-center">
             <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
+            
             <div class="hidden md:flex space-x-12 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-400">
                 <a href="index.html" class="hover:text-black transition">Inicio</a>
                 <a href="portafolio.html" class="hover:text-black transition">Portafolio</a>
                 <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
                 <a href="contacto.html" class="text-black font-bold">Contacto</a>
             </div>
-            <button class="md:hidden text-black block z-[150] p-2" onclick="toggleMenu()">
+
+            <button class="md:hidden text-black block z-[200] p-2" onclick="toggleMenu()" aria-label="Menu">
                 <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
             </button>
         </div>
     </nav>
 
-    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[110] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
         <a href="index.html" onclick="toggleMenu()" class="font-light">Inicio</a>
         <a href="portafolio.html" onclick="toggleMenu()" class="font-light">Portafolio</a>
         <a href="sobre-mi.html" onclick="toggleMenu()" class="font-light">Sobre mí</a>
@@ -131,26 +133,34 @@
     </footer>
 
     <script>
+        // Inicializar iconos
         lucide.createIcons();
 
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
-            const icon = document.getElementById('menu-icon');
+            const iconElement = document.getElementById('menu-icon');
             const isHidden = overlay.classList.contains('hidden');
+
             if (isHidden) {
+                // Abrir menú
                 overlay.classList.remove('hidden');
                 overlay.classList.add('flex');
-                icon.setAttribute('data-lucide', 'x');
-                document.body.style.overflow = 'hidden';
+                // Cambiar a icono X
+                iconElement.setAttribute('data-lucide', 'x');
+                document.body.style.overflow = 'hidden'; 
             } else {
+                // Cerrar menú
                 overlay.classList.add('hidden');
                 overlay.classList.remove('flex');
-                icon.setAttribute('data-lucide', 'menu');
+                // Cambiar a icono Hamburguesa
+                iconElement.setAttribute('data-lucide', 'menu');
                 document.body.style.overflow = 'auto';
             }
+            // Re-renderizar el icono cambiado
             lucide.createIcons();
         }
 
+        // Animación al hacer scroll
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             for (let i = 0; i < reveals.length; i++) {
