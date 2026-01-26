@@ -35,26 +35,44 @@
             display: block;
         }
 
-        /* Bloques de texto con botón */
+        /* Bloques de texto con variantes de color */
         .text-block-item {
-            background-color: #fcfcfc;
             padding: 60px 40px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            border: 1px solid #f0f0f0;
-            min-height: 350px;
+            min-height: 380px;
+            transition: all 0.3s ease;
         }
         
+        /* Variantes de color aleatorias */
+        .theme-dark { background-color: #000; color: #fff; }
+        .theme-light { background-color: #fff; color: #000; border: 1px solid #f0f0f0; }
+        .theme-gray { background-color: #f4f4f5; color: #000; }
+
         .phrase-text {
             font-family: 'Roboto', sans-serif;
             font-weight: 900;
-            color: #000;
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-bottom: 30px;
+            text-transform: none; /* No cursiva, Bold */
         }
+
+        /* Botón Rectangular */
+        .btn-rect {
+            padding: 12px 24px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .theme-dark .btn-rect { background-color: #fff; color: #000; }
+        .theme-light .btn-rect { background-color: #000; color: #fff; }
+        .theme-gray .btn-rect { background-color: #000; color: #fff; }
 
         #mobile-menu { display: none; }
         #mobile-menu.active { display: flex; }
@@ -65,14 +83,12 @@
     <nav class="fixed w-full z-50 bg-white/95 border-b border-zinc-100 px-6 py-5">
         <div class="max-w-[1800px] mx-auto flex justify-between items-center">
             <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
-            
             <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
                 <a href="index.html" class="text-black transition">Inicio</a>
                 <a href="portafolio.html" class="hover:text-black transition">Portafolio</a>
                 <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
-
             <button class="md:hidden text-black" onclick="toggleMenu()">
                 <i data-lucide="menu"></i>
             </button>
@@ -113,7 +129,7 @@
         const images = [
             "img/portfolio-018.jpg", "img/portfolio-003.webp", "img/portfolio-020.webp",
             "img/portfolio-005.webp", "img/portfolio-007.webp", "img/portfolio-008.webp",
-            "img/portfolio-011.webp", "img/portfolio-012.webp", "img/portfolio-021.webp",
+            "img/portfolio-012.webp", "img/portfolio-021.webp",
             "img/portfolio-014.webp", "img/portfolio-016.webp", "img/portfolio-022.webp",
             "img/portfolio-017.webp", "img/portfolio-023.webp", "img/portfolio-001C.webp",
             "img/portfolio-002C.webp", "img/portfolio-003C.webp", "img/portfolio-004C.webp",
@@ -134,38 +150,47 @@
             return array;
         }
 
+        const themes = ['theme-dark', 'theme-light', 'theme-gray'];
         let shuffledImages = shuffle([...images]);
         let shuffledPhrases = shuffle([...phrases]);
-        let finalItems = shuffledImages.map(src => ({ type: 'image', content: src }));
+        
+        const grid = document.getElementById('photo-grid');
+        
+        // --- Distribución Espaciada ---
+        // Insertamos fotos y luego intercalamos frases asegurando min. 4 fotos entre ellas
+        let items = shuffledImages.map(img => ({ type: 'image', content: img }));
+        
+        // Posiciones: Una al inicio (1-3), otra al medio, otra al final
+        let positions = [
+            Math.floor(Math.random() * 3) + 1,
+            Math.floor(Math.random() * 5) + 8,
+            Math.floor(Math.random() * 4) + 16
+        ];
 
-        // Insertar frases con lógica de posición
-        const firstPhrasePos = Math.floor(Math.random() * 3) + 1;
-        finalItems.splice(firstPhrasePos, 0, { type: 'text', content: shuffledPhrases.pop() });
-
-        shuffledPhrases.forEach(phrase => {
-            const pos = Math.floor(Math.random() * (finalItems.length - 10)) + 8;
-            finalItems.splice(pos, 0, { type: 'text', content: phrase });
+        positions.forEach((pos, i) => {
+            if (shuffledPhrases[i]) {
+                items.splice(pos, 0, { type: 'text', content: shuffledPhrases[i] });
+            }
         });
 
-        const grid = document.getElementById('photo-grid');
-        finalItems.forEach(item => {
+        items.forEach(item => {
             const div = document.createElement('div');
             div.className = 'grid-item';
             
             if (item.type === 'image') {
                 div.innerHTML = `<img src="${item.content}" alt="Kevin Puelles">`;
             } else {
+                const randomTheme = themes[Math.floor(Math.random() * themes.length)];
                 div.innerHTML = `
-                    <div class="text-block-item">
-                        <p class="phrase-text text-2xl md:text-4xl italic">${item.content}</p>
-                        <a href="portafolio.html" class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-black border-b-2 border-black pb-1 hover:text-zinc-500 hover:border-zinc-500 transition-all">
-                            Ver portafolio <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                        </a>
+                    <div class="text-block-item ${randomTheme}">
+                        <p class="phrase-text text-2xl md:text-4xl">${item.content}</p>
+                        <a href="portafolio.html" class="btn-rect">Ver portafolio</a>
                     </div>`;
             }
             grid.appendChild(div);
         });
-        lucide.createIcons(); // Re-ejecutar para los iconos inyectados
+
+        lucide.createIcons();
     </script>
 </body>
 </html>
