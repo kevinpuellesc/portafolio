@@ -10,6 +10,9 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .input-focus:focus { border-color: #000; outline: none; }
+        /* Control del menú móvil */
+        #mobile-menu { display: none; }
+        #mobile-menu.active { display: flex; }
     </style>
 </head>
 <body class="bg-white text-zinc-900 font-light">
@@ -17,13 +20,26 @@
     <nav class="fixed w-full z-50 bg-white/95 border-b border-zinc-100 px-6 py-5">
         <div class="max-w-[1800px] mx-auto flex justify-between items-center">
             <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
-            <div class="space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
+            
+            <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
                 <a href="index.html" class="hover:text-black transition">Inicio</a>
                 <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
                 <a href="index.html#proyectos" class="hover:text-black transition">Proyectos</a>
             </div>
+
+            <button class="md:hidden text-black" onclick="toggleMenu()">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
         </div>
     </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+        <button class="absolute top-6 right-6" onclick="toggleMenu()"><i data-lucide="x"></i></button>
+        <a href="index.html" onclick="toggleMenu()" class="font-light">Inicio</a>
+        <a href="sobre-mi.html" onclick="toggleMenu()" class="font-light">Sobre mí</a>
+        <a href="index.html#proyectos" onclick="toggleMenu()" class="font-light">Proyectos</a>
+        <a href="contacto.html" onclick="toggleMenu()" class="font-light">Contacto</a>
+    </div>
 
     <main class="pt-40 pb-24 px-6">
         <div class="max-w-5xl mx-auto">
@@ -37,13 +53,13 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
                 
-                <div class="order-2 md:order-1">
+                <div class="md:order-1">
                     <div class="aspect-[4/5] overflow-hidden bg-zinc-100 shadow-sm">
-                        <img src="img/363947552_821734349586850_7767453970512896822_n.jpeg" alt="Kevin Puelles Trabajo" class="w-full h-full object-cover">
+                        <img src="img/363947552_821734349586850_7767453970512896822_n.jpeg" alt="Kevin Puelles" class="w-full h-full object-cover">
                     </div>
                 </div>
 
-                <div class="space-y-12 order-1 md:order-2">
+                <div class="space-y-12 md:order-2">
                     <form action="https://formspree.io/f/TU_ID_AQUÍ" method="POST" class="space-y-10">
                         <div class="space-y-8">
                             <div>
@@ -88,6 +104,12 @@
         <p class="text-[9px] tracking-[0.5em] text-zinc-300 uppercase">© 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.</p>
     </footer>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
