@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
         
         .masonry-grid {
             display: flex;
@@ -28,7 +27,6 @@
                 break-inside: avoid;
                 margin-bottom: 10px;
                 display: block;
-                position: relative; /* Necesario para el texto montado */
             }
         }
         .grid-item img {
@@ -37,16 +35,23 @@
             display: block;
         }
 
-        /* Capa de texto sobre imagen */
-        .overlay-text {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+        /* Estilo para las tarjetas de texto independientes */
+        .text-block-item {
+            background-color: #fcfcfc; /* Un blanco roto muy sutil */
+            padding: 50px 30px;
             display: flex;
-            align-items: flex-end;
-            padding: 30px;
-            color: white;
-            pointer-events: none; /* Permite clics a través del texto si fuera necesario */
+            align-items: center;
+            justify-content: flex-start; /* Alineado a la izquierda como un pie de foto */
+            border: 1px solid #f0f0f0;
+            min-height: 250px;
+        }
+        
+        .phrase-text {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+            color: #000;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
 
         #mobile-menu { display: none; }
@@ -63,7 +68,7 @@
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
             <button class="md:hidden text-black" onclick="toggleMenu()">
-                <i data-lucide="menu" id="menu-icon"></i>
+                <i data-lucide="menu"></i>
             </button>
         </div>
     </nav>
@@ -122,37 +127,36 @@
             return array;
         }
 
+        // Lógica para intercalar frases
         let shuffledImages = shuffle([...images]);
         let shuffledPhrases = shuffle([...phrases]);
+        let finalItems = shuffledImages.map(src => ({ type: 'image', content: src }));
+
+        // Insertar la primera frase en las posiciones 1, 2 o 3 (índices del array)
+        const firstPhrasePos = Math.floor(Math.random() * 3) + 1;
+        finalItems.splice(firstPhrasePos, 0, { type: 'text', content: shuffledPhrases.pop() });
+
+        // Insertar las otras dos en posiciones aleatorias más adelante
+        shuffledPhrases.forEach(phrase => {
+            const pos = Math.floor(Math.random() * (finalItems.length - 10)) + 8;
+            finalItems.splice(pos, 0, { type: 'text', content: phrase });
+        });
 
         const grid = document.getElementById('photo-grid');
-        
-        // Asignamos frases a posiciones específicas para cumplir tu regla
-        // Una frase en las primeras 4, el resto después.
-        let phrasePositions = [
-            Math.floor(Math.random() * 4), 
-            8 + Math.floor(Math.random() * 4),
-            15 + Math.floor(Math.random() * 4)
-        ];
-
-        shuffledImages.forEach((src, index) => {
+        finalItems.forEach(item => {
             const div = document.createElement('div');
             div.className = 'grid-item';
             
-            let html = `<img src="${src}" alt="Kevin Puelles Fotografía">`;
-            
-            // Si el índice coincide con una posición de frase, la montamos encima
-            if (phrasePositions.includes(index) && shuffledPhrases.length > 0) {
-                const text = shuffledPhrases.pop();
-                html += `
-                    <div class="overlay-text">
-                        <p class="font-roboto-black text-2xl md:text-3xl uppercase leading-none tracking-tighter">
-                            ${text}
+            if (item.type === 'image') {
+                div.innerHTML = `<img src="${item.content}" alt="Fotografía Kevin Puelles">`;
+            } else {
+                div.innerHTML = `
+                    <div class="text-block-item">
+                        <p class="phrase-text text-2xl md:text-4xl">
+                            ${item.content}
                         </p>
                     </div>`;
             }
-            
-            div.innerHTML = html;
             grid.appendChild(div);
         });
     </script>
