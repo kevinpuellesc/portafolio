@@ -51,7 +51,6 @@
             
             <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
                 <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
-                <a href="#proyectos" class="hover:text-black transition">Proyectos</a>
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
 
@@ -65,7 +64,6 @@
         <button class="absolute top-6 right-6" onclick="toggleMenu()"><i data-lucide="x"></i></button>
         <a href="index.html" onclick="toggleMenu()" class="font-light">Inicio</a>
         <a href="sobre-mi.html" onclick="toggleMenu()" class="font-light">Sobre mí</a>
-        <a href="#proyectos" onclick="toggleMenu()" class="font-light">Proyectos</a>
         <a href="contacto.html" onclick="toggleMenu()" class="font-light">Contacto</a>
     </div>
 
@@ -74,33 +72,13 @@
             </div>
     </main>
 
-    <section id="proyectos" class="py-32 px-6 bg-zinc-50 border-t border-zinc-100">
-        <div class="max-w-6xl mx-auto">
-            <span class="text-zinc-400 uppercase tracking-[0.3em] text-[10px] font-bold mb-12 block text-center">Historias Seleccionadas</span>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-                <a href="fotos-de-lucha.html" class="group block">
-                    <div class="aspect-[16/10] overflow-hidden bg-white mb-6">
-                        <img src="img/portfolio-018.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <h3 class="text-2xl font-normal text-black italic">FotosDeLucha</h3>
-                    <p class="text-zinc-500 text-sm mt-3 font-light leading-relaxed">Registro autogestionado del proceso popular peruano y la memoria colectiva desde 2022.</p>
-                </a>
-
-                <div class="opacity-30">
-                    <div class="aspect-[16/10] bg-zinc-200 mb-6 flex items-center justify-center italic text-zinc-400">Próximamente</div>
-                    <h3 class="text-2xl font-normal text-zinc-400">Investigación en curso</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-24 bg-white text-center px-6">
+    <footer class="py-24 bg-white text-center px-6 border-t border-zinc-50">
         <div class="flex flex-col items-center gap-8">
             <a href="contacto.html" class="group inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] font-bold text-black border border-black px-12 py-4 hover:bg-black hover:text-white transition-all duration-500">
                 Trabajemos juntos
                 <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
             </a>
+            
             <p class="mt-12 text-[9px] tracking-[0.5em] text-zinc-300 uppercase">© 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.</p>
         </div>
     </footer>
@@ -113,7 +91,6 @@
             menu.classList.toggle('active');
         }
 
-        // Listado de todas tus imágenes incorporadas
         const images = [
             "img/portfolio-018.jpg",
             "img/portfolio-003.webp",
@@ -121,6 +98,7 @@
             "img/portfolio-005.webp",
             "img/portfolio-007.webp",
             "img/portfolio-008.webp",
+            "img/portfolio-011.webp",
             "img/portfolio-012.webp",
             "img/portfolio-021.webp",
             "img/portfolio-014.webp",
@@ -132,10 +110,11 @@
             "img/portfolio-002C.webp",
             "img/portfolio-003C.webp",
             "img/portfolio-004C.webp",
-            "img/portfolio-005C.webp"
+            "img/portfolio-005C.webp",
+            "img/portfolio-001cc.webp",
+            "img/portfolio-002cc.webp"
         ];
 
-        // Función para mezclar (shuffle) el array aleatoriamente
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -144,7 +123,6 @@
             return array;
         }
 
-        // Renderizar el grid
         const grid = document.getElementById('photo-grid');
         shuffle(images).forEach(src => {
             const div = document.createElement('div');
@@ -155,4 +133,3 @@
     </script>
 </body>
 </html>
-
