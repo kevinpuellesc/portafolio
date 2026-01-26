@@ -10,7 +10,9 @@
         html { scroll-behavior: smooth; }
         .slide { display: none; transition: opacity 1s ease-in-out; }
         .slide.active { display: block; }
-        .font-serif { font-family: Georgia, serif; }
+        /* Estilo sutil para enlaces de texto */
+        .link-underlined { border-bottom: 1px solid #d4d4d8; transition: border-color 0.3s; }
+        .link-underlined:hover { border-color: #000; }
     </style>
 </head>
 <body class="bg-white text-zinc-900 font-light">
@@ -61,7 +63,7 @@
                         Soy <span class="text-black font-medium">fotógrafo documental e investigador visual</span>. Mi trabajo se centra en documentar la realidad social y las historias humanas con una mirada honesta y comprometida. Creo en la fotografía como un modo de estar: mirar con respeto, comprender con tiempo y narrar con transparencia.
                     </p>
                     <p>
-                        Desde 2022, dirijo <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="text-black font-medium border-b border-zinc-300 hover:border-black transition-all">FotosDeLucha</a>, una iniciativa autogestionada dedicada a registrar los procesos sociales y las expresiones populares en las distintas regiones del Perú. Mi enfoque busca ir más allá del registro, intentando establecer un diálogo entre la cámara y el entorno.
+                        Desde 2022, dirijo <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="text-black font-medium link-underlined">FotosDeLucha</a>, una iniciativa autogestionada dedicada a registrar los procesos sociales y las expresiones populares en las distintas regiones del Perú. Mi enfoque busca ir más allá del registro, intentando establecer un diálogo entre la cámara y el entorno.
                     </p>
                     <p>
                         En paralelo, realizo coberturas fotográficas para instituciones y organizaciones, aplicando la misma sensibilidad documental a la fotografía de eventos, retratos y proyectos institucionales.
@@ -82,26 +84,33 @@
                 <h2 class="text-4xl font-light text-zinc-900">Portafolio</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="group cursor-pointer">
+                <a href="fotos-de-lucha.html" class="group block cursor-pointer">
                     <div class="relative overflow-hidden aspect-[16/10] bg-zinc-200">
                         <img src="img/portfolio-018.jpg" alt="FotosDeLucha" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white text-xs uppercase tracking-[0.2em] border border-white px-4 py-2">Explorar proyecto</span>
+                        </div>
                     </div>
                     <div class="mt-6">
                         <span class="text-xs uppercase tracking-widest text-zinc-400 font-bold">Investigación Visual / Documental</span>
                         <h3 class="text-2xl font-light mt-2 group-hover:text-zinc-600 transition-colors">FotosDeLucha</h3>
-                        <p class="text-zinc-500 mt-2 text-sm leading-relaxed">Registro de procesos sociales y expresiones populares en las regiones del Perú.</p>
+                        <p class="text-zinc-500 mt-2 text-sm leading-relaxed text-justify">Registro de procesos sociales y expresiones populares en las regiones del Perú.</p>
                     </div>
-                </div>
+                </a>
+                
                 <div class="group opacity-40">
                     <div class="aspect-[16/10] bg-zinc-200 flex items-center justify-center italic text-zinc-400">Próximamente</div>
-                    <div class="mt-6"><h3 class="text-2xl font-light italic">Proyecto en preparación</h3></div>
+                    <div class="mt-6">
+                        <span class="text-xs uppercase tracking-widest text-zinc-400 font-bold">Evento / Corporativo</span>
+                        <h3 class="text-2xl font-light mt-2 italic">Proyecto en preparación</h3>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <footer id="contacto" class="py-24 bg-white px-6 text-center border-t border-zinc-100">
-        <h2 class="text-3xl font-light mb-8">¿Hablamos?</h2>
+        <h2 class="text-3xl font-light mb-8 font-serif">¿Hablamos?</h2>
         <div class="flex justify-center gap-12 text-zinc-500">
             <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="flex items-center gap-2 hover:text-black transition">
                 <i data-lucide="instagram" class="w-5 h-5"></i> Instagram
@@ -114,15 +123,22 @@
     </footer>
 
     <script>
+        // Inicializar Iconos
         lucide.createIcons();
-        // Slider Logic
+
+        // Lógica del Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        setInterval(() => {
+        
+        function nextSlide() {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 5000);
+        }
+        
+        if(slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
     </script>
 </body>
 </html>
