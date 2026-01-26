@@ -16,6 +16,13 @@
         .gallery-item {
             break-inside: avoid;
             margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.03);
         }
     </style>
 </head>
@@ -24,7 +31,7 @@
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-xs uppercase tracking-[0.2em] flex items-center gap-2 hover:text-orange-600 transition">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al inicio
             </a>
             <h1 class="text-sm font-bold tracking-tighter uppercase tracking-widest">FotosDeLucha</h1>
         </div>
@@ -32,76 +39,84 @@
 
     <header class="pt-32 pb-16 px-6">
         <div class="max-w-4xl mx-auto">
-            <span class="text-orange-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Investigación Visual</span>
+            <span class="text-orange-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Investigación Visual / Documental</span>
             <h2 class="text-5xl font-light mb-8 text-zinc-900">FotosDeLucha</h2>
             
-            <p class="text-xl text-zinc-600 leading-relaxed mb-12 text-justify">
-                Esta iniciativa autogestionada se dedica a registrar los procesos sociales y las expresiones populares en las distintas regiones del Perú. El proyecto busca establecer un diálogo entre la cámara y el entorno, documentando la memoria viva de las luchas sociales.
-            </p>
-
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs border-t border-zinc-100 pt-8">
                 <div>
                     <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Proyecto</h4>
-                    <p>FotosDeLucha</p>
+                    <p>Iniciativa Social</p>
                 </div>
                 <div>
                     <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Año</h4>
                     <p>2022 - Presente</p>
                 </div>
                 <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">País</h4>
+                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Ubicación</h4>
                     <p>Perú</p>
                 </div>
                 <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">IG</h4>
-                    <a href="https://www.instagram.com/fotosdelucha.pe/" class="text-orange-600 hover:underline">@fotosdelucha.pe</a>
+                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Enlace</h4>
+                    <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="text-orange-600 hover:underline">Instagram</a>
                 </div>
             </div>
         </div>
     </header>
 
     <section class="px-6 pb-24">
-        <div class="max-w-6xl mx-auto gallery-container">
+        <div class="max-w-6xl mx-auto">
             
-            <div class="gallery-item">
-                <img src="img/portfolio-018.jpg" class="w-full h-auto" alt="FotosDeLucha Registro">
+            <div class="max-w-4xl mb-20 space-y-6 text-zinc-600 text-lg leading-relaxed text-justify">
+                <p>
+                    Ante la crisis política iniciada en el Perú en diciembre de 2022 y la violencia sistemática ejercida contra la ciudadanía, decidí utilizar la fotografía documental como una herramienta artística y política. Mi trabajo busca retratar este periodo complejo más allá de lo desgarrador, entendiendo la imagen como un vehículo para construir comunidad y brindar acompañamiento a víctimas, deudos y movimientos sociales.
+                </p>
+                <p>
+                    Este compromiso dio origen a <span class="text-black font-medium">FotosDeLucha</span>, una iniciativa desde la cual realizo registros autogestionados, exposiciones callejeras y talleres gratuitos dirigidos a jóvenes y activistas. A través de la pedagogía y la investigación social, buscamos que las comunidades narren sus propias experiencias. Esta labor se ha materializado también en un fotolibro autoeditado y traducido a cuatro idiomas, conectando la realidad peruana con la solidaridad internacional.
+                </p>
+                <p>
+                    Aunque mi trabajo nace de la indignación, no se limita a ella: es una respuesta activa que busca sumar al cambio local a través de la memoria y el diálogo visual.
+                </p>
             </div>
 
-            <div class="gallery-item">
-                <img src="img/portfolio-001.jpg" class="w-full h-auto" alt="Procesos sociales Perú">
-            </div>
-
-            <div class="gallery-item">
-                <img src="img/portfolio-002.jpg" class="w-full h-auto" alt="Expresiones populares">
-            </div>
-
-            <div class="gallery-item">
-                <img src="img/portfolio-003.jpg" class="w-full h-auto" alt="Kevin Puelles Fotografía">
-            </div>
-
-            <div class="gallery-item">
-                <img src="img/portfolio-009.jpg" class="w-full h-auto" alt="Documental Perú">
-            </div>
-
-            <div class="gallery-item">
-                <img src="img/portfolio-010.jpg" class="w-full h-auto" alt="Investigación visual">
-            </div>
-
-            <div class="gallery-item">
-                <img src="img/portfolio-011.jpg" class="w-full h-auto" alt="Registro social">
-            </div>
-
-            <div class="gallery-item">
-                <img src="img/portfolio-013.jpg" class="w-full h-auto" alt="Luchas sociales Perú">
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="img/portfolio-018.jpg" alt="Fotos de Lucha 018" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-001.jpg" alt="Fotos de Lucha 001" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-002.jpg" alt="Fotos de Lucha 002" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-003.jpg" alt="Fotos de Lucha 003" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-009.jpg" alt="Fotos de Lucha 009" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-010.jpg" alt="Fotos de Lucha 010" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-011.jpg" alt="Fotos de Lucha 011" class="w-full h-auto bg-zinc-100">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/portfolio-013.jpg" alt="Fotos de Lucha 013" class="w-full h-auto bg-zinc-100">
+                </div>
             </div>
 
         </div>
     </section>
 
-    <footer class="py-12 border-t border-zinc-100 text-center">
-        <a href="index.html#portafolio" class="text-xs uppercase tracking-widest hover:text-orange-600 transition">Siguiente Proyecto</a>
+    <footer class="py-24 border-t border-zinc-100 text-center">
+        <p class="text-zinc-400 text-xs uppercase tracking-[0.3em] mb-8">Kevin Puelles • 2026</p>
+        <a href="index.html#portafolio" class="px-10 py-4 border border-zinc-900 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition duration-500">
+            Volver al Portafolio
+        </a>
     </footer>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
