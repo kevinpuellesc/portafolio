@@ -70,25 +70,8 @@
     </div>
 
     <main class="pt-24 pb-10">
-        <div class="masonry-grid">
-            <div class="grid-item">
-                <img src="img/portfolio-018.jpg" alt="Kevin Puelles">
+        <div id="photo-grid" class="masonry-grid">
             </div>
-            
-            <div class="grid-item"><img src="img/portfolio-003.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-020.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-005.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-007.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-008.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-011.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-012.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-021.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-014.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-016.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-022.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-017.webp"></div>
-            <div class="grid-item"><img src="img/portfolio-023.webp"></div>
-        </div>
     </main>
 
     <section id="proyectos" class="py-32 px-6 bg-zinc-50 border-t border-zinc-100">
@@ -118,22 +101,58 @@
                 Trabajemos juntos
                 <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
             </a>
-            
-            <div class="flex gap-10 mt-12 text-zinc-400">
-                <a href="https://www.instagram.com/kevinpuellescardenas/" target="_blank" class="hover:text-black transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                <a href="https://wa.me/51942022951" target="_blank" class="hover:text-black transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
-            </div>
-            
             <p class="mt-12 text-[9px] tracking-[0.5em] text-zinc-300 uppercase">© 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.</p>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('active');
         }
+
+        // Listado de todas tus imágenes incorporadas
+        const images = [
+            "img/portfolio-018.jpg",
+            "img/portfolio-003.webp",
+            "img/portfolio-020.webp",
+            "img/portfolio-005.webp",
+            "img/portfolio-007.webp",
+            "img/portfolio-008.webp",
+            "img/portfolio-011.webp",
+            "img/portfolio-012.webp",
+            "img/portfolio-021.webp",
+            "img/portfolio-014.webp",
+            "img/portfolio-016.webp",
+            "img/portfolio-022.webp",
+            "img/portfolio-017.webp",
+            "img/portfolio-023.webp",
+            "img/portfolio-001C.webp",
+            "img/portfolio-002C.webp",
+            "img/portfolio-003C.webp",
+            "img/portfolio-004C.webp",
+            "img/portfolio-005C.webp"
+        ];
+
+        // Función para mezclar (shuffle) el array aleatoriamente
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Renderizar el grid
+        const grid = document.getElementById('photo-grid');
+        shuffle(images).forEach(src => {
+            const div = document.createElement('div');
+            div.className = 'grid-item';
+            div.innerHTML = `<img src="${src}" alt="Kevin Puelles Fotografía">`;
+            grid.appendChild(div);
+        });
     </script>
 </body>
 </html>
