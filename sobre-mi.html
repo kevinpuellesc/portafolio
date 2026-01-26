@@ -8,19 +8,14 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fff; }
+        body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
         .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
         
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         #mobile-overlay.hidden { display: none; }
         #mobile-overlay.flex { display: flex; }
-
-        .image-reveal {
-            clip-path: inset(0 0 100% 0);
-            transition: clip-path 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .image-reveal.active {
-            clip-path: inset(0 0 0 0);
-        }
     </style>
 </head>
 <body class="text-zinc-900 overflow-x-hidden">
@@ -36,7 +31,7 @@
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
 
-            <button class="md:hidden text-black block z-[150] p-2" onclick="toggleMenu()">
+            <button class="md:hidden text-black block z-[150] p-2" onclick="toggleMenu()" id="menu-toggle">
                 <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
             </button>
         </div>
@@ -49,73 +44,81 @@
         <a href="contacto.html" onclick="toggleMenu()" class="font-light">Contacto</a>
     </div>
 
-    <main class="pt-32 md:pt-48 pb-24 px-6 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+    <main class="pt-32 md:pt-48 pb-40">
+        <header class="px-6 max-w-7xl mx-auto mb-16 md:mb-24">
+            <h1 class="font-roboto-black text-6xl md:text-[10rem] uppercase tracking-tighter leading-[0.8] mb-12 reveal active">
+                Sobre <br>mí
+            </h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-zinc-100 pt-12 reveal active">
+                <div class="md:col-span-2">
+                    <p class="text-2xl md:text-4xl font-light leading-tight text-zinc-800 tracking-tight">
+                        Soy fotógrafo documental e investigador visual. Mi trabajo se centra en documentar la realidad social y las historias humanas con una mirada comprometida.
+                    </p>
+                </div>
+                <div class="text-[11px] uppercase tracking-[0.3em] space-y-4 text-zinc-400">
+                    <p>Basado en Lima, Perú</p>
+                    <p>Director de FotosDeLucha</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="reveal px-4 mb-24 md:mb-32">
+            <div class="max-w-7xl mx-auto">
+                <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/portfolio-008.webp?raw=true" alt="Kevin Puelles" class="w-full grayscale">
+            </div>
+        </section>
+
+        <section class="reveal px-6 max-w-4xl mx-auto space-y-10 text-lg md:text-2xl font-light leading-relaxed text-zinc-600">
+            <p>
+                Creo en la fotografía como un modo de estar.
+            </p>
             
-            <div class="relative">
-                <div class="image-reveal active overflow-hidden">
-                    <img src="https://github.com/kevinpuellesc/portafolio/blob/main/img/portfolio-008.webp?raw=true" alt="Kevin Puelles" class="w-full grayscale hover:grayscale-0 transition-all duration-700">
-                </div>
-                <div class="mt-8 space-y-2">
-                    <p class="text-[10px] uppercase tracking-[0.3em] text-zinc-400">Basado en</p>
-                    <p class="text-sm font-medium">Lima, Perú</p>
-                </div>
+            <p>
+                Desde 2022, dirijo <strong>FotosDeLucha</strong>, una iniciativa autogestionada dedicada a registrar y difundir el proceso nacional y popular peruano.
+            </p>
+
+            <div class="py-12 border-y border-zinc-100 my-16">
+                <p class="text-zinc-800 tracking-tight">
+                    Mi enfoque busca ir más allá del registro, intentando establecer un diálogo entre la cámara y el entorno. 
+                </p>
             </div>
 
-            <div class="space-y-12">
-                <header>
-                    <h1 class="font-roboto-black text-6xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-6">
-                        Mirar con <br>Respeto
-                    </h1>
-                    <p class="text-zinc-400 text-sm uppercase tracking-widest font-medium">Fotógrafo Documental</p>
-                </header>
+            <p>
+                En paralelo, realizo coberturas fotográficas para instituciones y organizaciones, aplicando la misma sensibilidad documental a la fotografía de eventos, retratos y proyectos institucionales.
+            </p>
+        </section>
 
-                <div class="space-y-6 text-lg md:text-xl font-light leading-relaxed text-zinc-600">
-                    <p>
-                        Soy Kevin Puelles, fotógrafo enfocado en la narrativa documental y los procesos sociales. Mi trabajo nace de la necesidad de registrar la realidad peruana desde una posición de escucha y transparencia.
-                    </p>
-                    <p>
-                        Para mí, la cámara no es un escudo, sino un puente. A través de proyectos como <strong>FotosDeLucha</strong>, busco documentar no solo los hechos, sino la dignidad de quienes habitan el territorio y sus resistencias.
-                    </p>
-                    <p>
-                        Creo firmemente en la fotografía como una herramienta de memoria colectiva. Mi práctica se extiende más allá del disparo, involucrándome en talleres comunitarios y exposiciones callejeras que devuelven la imagen a su origen: la gente.
-                    </p>
+        <section class="reveal px-6 max-w-7xl mx-auto mt-32">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 border-t border-zinc-100 pt-16">
+                <div>
+                    <h4 class="font-roboto-black text-xl uppercase mb-6 tracking-tight">Investigación</h4>
+                    <ul class="text-[12px] uppercase tracking-widest space-y-3 text-zinc-500">
+                        <li>• Procesos Nacionales</li>
+                        <li>• Movimientos Populares</li>
+                        <li>• Realidad Social</li>
+                    </ul>
                 </div>
-
-                <div class="grid grid-cols-2 gap-8 pt-12 border-t border-zinc-100">
-                    <div>
-                        <h4 class="text-[10px] uppercase tracking-[0.3em] text-zinc-400 mb-4">Enfoque</h4>
-                        <ul class="text-sm space-y-2 font-medium">
-                            <li>Derechos Humanos</li>
-                            <li>Cultura Popular</li>
-                            <li>Conflictos Sociales</li>
-                            <li>Memoria Histórica</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-[10px] uppercase tracking-[0.3em] text-zinc-400 mb-4">Servicios</h4>
-                        <ul class="text-sm space-y-2 font-medium">
-                            <li>Cobertura Editorial</li>
-                            <li>Ensayos Documentales</li>
-                            <li>Talleres de Fotografía</li>
-                            <li>Curaduría Visual</li>
-                        </ul>
-                    </div>
+                <div>
+                    <h4 class="font-roboto-black text-xl uppercase mb-6 tracking-tight">Servicios</h4>
+                    <ul class="text-[12px] uppercase tracking-widest space-y-3 text-zinc-500">
+                        <li>• Cobertura Institucional</li>
+                        <li>• Retrato Documental</li>
+                        <li>• Fotografía de Eventos</li>
+                        <li>• Proyectos Editoriales</li>
+                    </ul>
                 </div>
-
-                <div class="pt-10">
-                    <a href="contacto.html" class="inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] font-bold text-black border-b-2 border-black pb-2 hover:text-zinc-500 hover:border-zinc-500 transition-all">
-                        Hablemos de tu proyecto
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
+                <div class="bg-black text-white p-8 md:p-12">
+                    <h4 class="font-roboto-black text-xl uppercase mb-4 tracking-tight">Contacto</h4>
+                    <p class="text-sm font-light mb-8 leading-relaxed">Disponible para asignaciones y proyectos colaborativos.</p>
+                    <a href="contacto.html" class="text-[10px] font-bold uppercase tracking-[0.3em] border-b border-white pb-1 hover:text-zinc-400 transition">Enviar mensaje</a>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="py-20 text-center px-6 border-t border-zinc-50">
+    <footer class="py-20 text-center px-6 border-t border-zinc-50 bg-white">
         <p class="text-[9px] tracking-[0.5em] text-zinc-300 uppercase">
-            © 2026 Kevin Puelles — Narrar con transparencia.
+            © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
         </p>
     </footer>
 
@@ -131,15 +134,28 @@
                 overlay.classList.remove('hidden');
                 overlay.classList.add('flex');
                 icon.setAttribute('data-lucide', 'x');
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; 
             } else {
                 overlay.classList.add('hidden');
                 overlay.classList.remove('flex');
                 icon.setAttribute('data-lucide', 'menu');
                 document.body.style.overflow = 'auto';
             }
-            lucide.createIcons();
+            lucide.createIcons(); 
         }
+
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
     </script>
 </body>
 </html>
