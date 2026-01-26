@@ -14,8 +14,14 @@
         .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* Control del Menú */
         #mobile-overlay.hidden { display: none; }
         #mobile-overlay.flex { display: flex; }
+        
+        /* Lógica de los iconos para que no fallen */
+        .icon-close { display: none; }
+        .menu-open .icon-hamburger { display: none; }
+        .menu-open .icon-close { display: block; }
 
         input, textarea {
             border: none;
@@ -51,8 +57,13 @@
                 <a href="contacto.html" class="text-black font-bold">Contacto</a>
             </div>
 
-            <button class="md:hidden text-black block z-[200] p-2" onclick="toggleMenu()" aria-label="Menu">
-                <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+            <button class="md:hidden text-black block z-[200] relative w-10 h-10" onclick="toggleMenu()" id="btn-toggle">
+                <div class="icon-hamburger absolute inset-0 flex items-center justify-center">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </div>
+                <div class="icon-close absolute inset-0 flex items-center justify-center">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </div>
             </button>
         </div>
     </nav>
@@ -81,7 +92,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 items-start">
-                
                 <div class="lg:col-span-5 reveal">
                     <img src="https://kevinpuellesc.github.io/portafolio/img/363947552_821734349586850_7767453970512896822_n.jpeg" alt="Kevin Puelles" class="w-full grayscale brightness-90 contrast-110">
                 </div>
@@ -92,17 +102,14 @@
                             <label for="name">¿Cómo te llamas?</label>
                             <input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
                         </div>
-                        
                         <div class="flex flex-col">
                             <label for="email">Tu correo</label>
                             <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
                         </div>
-
                         <div class="flex flex-col">
                             <label for="message">Coméntame tu idea o propuesta</label>
                             <textarea id="message" name="message" rows="4" placeholder="Escribe aquí los detalles de tu proyecto..." required></textarea>
                         </div>
-
                         <div class="pt-2">
                             <button type="submit" class="bg-black text-white text-[11px] uppercase tracking-[0.4em] font-bold px-14 py-6 hover:bg-zinc-800 transition-all w-full md:w-auto">
                                 Enviar mensaje
@@ -121,7 +128,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
@@ -133,34 +139,27 @@
     </footer>
 
     <script>
-        // Inicializar iconos
         lucide.createIcons();
 
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
-            const iconElement = document.getElementById('menu-icon');
+            const body = document.body;
+            const btn = document.getElementById('btn-toggle');
             const isHidden = overlay.classList.contains('hidden');
 
             if (isHidden) {
-                // Abrir menú
                 overlay.classList.remove('hidden');
                 overlay.classList.add('flex');
-                // Cambiar a icono X
-                iconElement.setAttribute('data-lucide', 'x');
-                document.body.style.overflow = 'hidden'; 
+                body.classList.add('menu-open'); // Activa la X por CSS
+                body.style.overflow = 'hidden';
             } else {
-                // Cerrar menú
                 overlay.classList.add('hidden');
                 overlay.classList.remove('flex');
-                // Cambiar a icono Hamburguesa
-                iconElement.setAttribute('data-lucide', 'menu');
-                document.body.style.overflow = 'auto';
+                body.classList.remove('menu-open'); // Activa la hamburguesa por CSS
+                body.style.overflow = 'auto';
             }
-            // Re-renderizar el icono cambiado
-            lucide.createIcons();
         }
 
-        // Animación al hacer scroll
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             for (let i = 0; i < reveals.length; i++) {
