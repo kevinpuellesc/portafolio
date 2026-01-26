@@ -35,18 +35,27 @@
             display: block;
         }
 
-        /* Bloques de texto con variantes de color */
+        /* Bloques de texto adaptables */
         .text-block-item {
-            padding: 60px 40px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            min-height: 380px;
             transition: all 0.3s ease;
+            /* Móvil: Menos alto y menos padding */
+            min-height: 260px; 
+            padding: 40px 30px;
         }
         
-        /* Variantes de color aleatorias */
+        @media (min-width: 768px) {
+            .text-block-item {
+                /* Escritorio: Se mantiene imponente */
+                min-height: 380px;
+                padding: 60px 40px;
+            }
+        }
+        
+        /* Temas de color */
         .theme-dark { background-color: #000; color: #fff; }
         .theme-light { background-color: #fff; color: #000; border: 1px solid #f0f0f0; }
         .theme-gray { background-color: #f4f4f5; color: #000; }
@@ -56,8 +65,7 @@
             font-weight: 900;
             line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: 30px;
-            text-transform: none; /* No cursiva, Bold */
+            margin-bottom: 25px;
         }
 
         /* Botón Rectangular */
@@ -68,7 +76,6 @@
             letter-spacing: 0.2em;
             font-weight: 700;
             display: inline-block;
-            transition: all 0.3s ease;
         }
         .theme-dark .btn-rect { background-color: #fff; color: #000; }
         .theme-light .btn-rect { background-color: #000; color: #fff; }
@@ -129,7 +136,7 @@
         const images = [
             "img/portfolio-018.jpg", "img/portfolio-003.webp", "img/portfolio-020.webp",
             "img/portfolio-005.webp", "img/portfolio-007.webp", "img/portfolio-008.webp",
-            "img/portfolio-012.webp", "img/portfolio-021.webp",
+            "img/portfolio-011.webp", "img/portfolio-012.webp", "img/portfolio-021.webp",
             "img/portfolio-014.webp", "img/portfolio-016.webp", "img/portfolio-022.webp",
             "img/portfolio-017.webp", "img/portfolio-023.webp", "img/portfolio-001C.webp",
             "img/portfolio-002C.webp", "img/portfolio-003C.webp", "img/portfolio-004C.webp",
@@ -154,13 +161,8 @@
         let shuffledImages = shuffle([...images]);
         let shuffledPhrases = shuffle([...phrases]);
         
-        const grid = document.getElementById('photo-grid');
-        
-        // --- Distribución Espaciada ---
-        // Insertamos fotos y luego intercalamos frases asegurando min. 4 fotos entre ellas
         let items = shuffledImages.map(img => ({ type: 'image', content: img }));
         
-        // Posiciones: Una al inicio (1-3), otra al medio, otra al final
         let positions = [
             Math.floor(Math.random() * 3) + 1,
             Math.floor(Math.random() * 5) + 8,
@@ -173,6 +175,7 @@
             }
         });
 
+        const grid = document.getElementById('photo-grid');
         items.forEach(item => {
             const div = document.createElement('div');
             div.className = 'grid-item';
