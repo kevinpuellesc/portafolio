@@ -37,7 +37,7 @@
         }
         .grid-item:hover img { opacity: 0.85; }
 
-        /* Estilo para los bloques de texto en el grid */
+        /* Estilo para los bloques de texto con más peso visual */
         .text-card {
             background-color: #f9f9f9;
             padding: 60px 40px;
@@ -45,7 +45,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            min-height: 300px;
+            min-height: 320px;
         }
 
         #mobile-menu { display: none; }
@@ -97,7 +97,6 @@
             menu.classList.toggle('active');
         }
 
-        // Definimos las fotos y las frases por separado
         const images = [
             "img/portfolio-018.jpg", "img/portfolio-003.webp", "img/portfolio-020.webp",
             "img/portfolio-005.webp", "img/portfolio-007.webp", "img/portfolio-008.webp",
@@ -114,7 +113,6 @@
             "La fotografía es el retrato del tiempo."
         ];
 
-        // Función de mezcla
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -123,15 +121,28 @@
             return array;
         }
 
-        // Preparamos los items mezclando fotos y frases
-        let allItems = images.map(src => ({ type: 'image', content: src }));
-        phrases.forEach(text => allItems.push({ type: 'text', content: text }));
+        // --- Lógica de Mezcla Controlada ---
+        // 1. Mezclamos las fotos
+        let shuffledImages = shuffle([...images]);
+        // 2. Mezclamos las frases
+        let shuffledPhrases = shuffle([...phrases]);
         
-        // Mezclamos todo el conjunto
-        shuffle(allItems);
+        // 3. Tomamos una frase para asegurar que esté al inicio (pos 0 a 3)
+        let firstPhrase = shuffledPhrases.pop();
+        let finalItems = shuffledImages.map(src => ({ type: 'image', content: src }));
+        
+        // Insertamos la primera frase en una posición aleatoria entre 0 y 3
+        const randomStartPos = Math.floor(Math.random() * 4);
+        finalItems.splice(randomStartPos, 0, { type: 'text', content: firstPhrase });
+
+        // 4. Insertamos las frases restantes de forma aleatoria en el resto del array
+        shuffledPhrases.forEach(text => {
+            const randomPos = Math.floor(Math.random() * (finalItems.length - 5)) + 5;
+            finalItems.splice(randomPos, 0, { type: 'text', content: text });
+        });
 
         const grid = document.getElementById('photo-grid');
-        allItems.forEach(item => {
+        finalItems.forEach(item => {
             const div = document.createElement('div');
             div.className = 'grid-item';
             
@@ -140,7 +151,7 @@
             } else {
                 div.innerHTML = `
                     <div class="text-card shadow-sm border border-zinc-50">
-                        <p class="text-xl md:text-2xl font-light italic text-zinc-500 leading-relaxed">
+                        <p class="text-xl md:text-3xl font-semibold italic text-black leading-tight">
                             "${item.content}"
                         </p>
                     </div>`;
