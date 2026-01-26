@@ -3,65 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Kevin Puelles | Fotógrafo Documental</title>
+    <title>Sobre mí | Kevin Puelles</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        #mobile-menu { display: none; }
+        #mobile-menu.active { display: flex; }
+    </style>
 </head>
 <body class="bg-white text-zinc-900 font-light">
 
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-xl font-bold tracking-tighter uppercase">Kevin Puelles</a>
-            <div class="space-x-8 text-xs uppercase tracking-[0.2em]">
-                <a href="index.html" class="hover:text-zinc-500 transition">Inicio</a>
-                <a href="index.html#portafolio" class="hover:text-zinc-500 transition">Portafolio</a>
+    <nav class="fixed w-full z-50 bg-white/95 border-b border-zinc-100 px-6 py-5">
+        <div class="max-w-[1800px] mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
+            
+            <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
+                <a href="index.html" class="hover:text-black transition">Inicio</a>
+                <a href="index.html#proyectos" class="hover:text-black transition">Proyectos</a>
+                <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
+
+            <button class="md:hidden text-black" onclick="toggleMenu()">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
     </nav>
 
-    <section class="pt-32 pb-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-16">
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+        <button class="absolute top-6 right-6" onclick="toggleMenu()"><i data-lucide="x"></i></button>
+        <a href="index.html" onclick="toggleMenu()">Inicio</a>
+        <a href="sobre-mi.html" onclick="toggleMenu()">Sobre mí</a>
+        <a href="index.html#proyectos" onclick="toggleMenu()">Proyectos</a>
+        <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+    </div>
+
+    <main class="pt-40 pb-24 px-6">
+        <div class="max-w-5xl mx-auto">
             
-            <div class="w-full md:w-1/2 lg:w-5/12 sticky top-32">
-                <div class="aspect-[4/5] overflow-hidden bg-zinc-100 shadow-sm">
-                    <img src="img/ProfileKevinPuelles.webp" alt="Kevin Puelles" class="w-full h-full object-cover">
-                </div>
-            </div>
-            
-            <div class="w-full md:w-1/2 lg:w-7/12">
-                <span class="text-zinc-400 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Biografía</span>
-                <h2 class="text-4xl font-light mb-8 text-zinc-900">Kevin Puelles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
                 
-                <div class="space-y-6 text-zinc-600 text-lg leading-relaxed text-justify">
-                    <p>
-                        Soy <span class="text-black font-medium">fotógrafo documental e investigador visual</span>. Mi trabajo se centra en documentar la realidad social y las historias humanas con una mirada honesta y comprometida. Creo en la fotografía como un modo de estar: mirar con respeto, comprender con tiempo y narrar con transparencia.
-                    </p>
-
-                    <p>
-                        Desde 2022, dirijo <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="text-black font-medium border-b border-zinc-300 hover:border-black transition-all">FotosDeLucha</a>, una iniciativa autogestionada dedicada a registrar los procesos sociales y las expresiones populares en las distintas regiones del Perú. Mi enfoque busca ir más allá del registro, intentando establecer un diálogo entre la cámara y el entorno.
-                    </p>
-
-                    <p>
-                        En paralelo, realizo coberturas fotográficas para instituciones y organizaciones, aplicando la misma sensibilidad documental a la fotografía de eventos, retratos y proyectos institucionales.
-                    </p>
+                <div class="w-full">
+                    <img src="img/363947552_821734349586850_7767453970512896822_n.jpeg" 
+                         alt="Kevin Puelles" 
+                         class="w-full h-auto shadow-sm grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
 
-                <div class="mt-12 pt-8 border-t border-zinc-100 flex gap-8 items-center">
-                    <a href="https://www.instagram.com/tu_usuario" target="_blank" class="text-zinc-600 hover:text-black transition-colors flex items-center gap-2 text-sm">
-                        <i data-lucide="instagram" class="w-5 h-5"></i> Instagram
-                    </a>
-                    <a href="https://wa.me/tu_numero" target="_blank" class="text-zinc-600 hover:text-black transition-colors flex items-center gap-2 text-sm">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
-                    </a>
+                <div class="space-y-8">
+                    <span class="text-zinc-400 uppercase tracking-[0.3em] text-[10px] font-bold">Investigador Visual</span>
+                    <h2 class="text-4xl font-normal text-black italic tracking-tight">Kevin Puelles</h2>
+                    
+                    <div class="text-lg text-zinc-600 leading-relaxed space-y-6 font-light">
+                        <p>
+                            Mi trabajo se centra en el registro y la investigación visual de procesos sociales en el Perú. Entiendo la fotografía no solo como un acto de captura, sino como una herramienta de memoria y diálogo con el territorio.
+                        </p>
+                        <p>
+                            A través de <span class="text-black">FotosDeLucha</span>, he buscado documentar la resistencia popular desde una perspectiva interna, respetando la dignidad de quienes habitan las imágenes y cuestionando las narrativas oficiales.
+                        </p>
+                        <p>
+                            Creo en una práctica documental que sea honesta, autogestionada y que sirva como puente para comprender las complejidades de nuestra identidad y nuestras luchas.
+                        </p>
+                    </div>
+
+                    <div class="pt-8 border-t border-zinc-100 flex gap-8">
+                        <a href="contacto.html" class="text-[10px] uppercase tracking-widest font-bold text-black border-b border-black pb-1 hover:opacity-50 transition">Hablemos</a>
+                        <a href="https://www.instagram.com/kevinpuellescardenas/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold text-zinc-400 hover:text-black transition">Instagram</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <footer class="py-12 border-t border-zinc-100 text-center">
-        <p class="text-[10px] uppercase tracking-[0.4em] text-zinc-400">© 2026 Kevin Puelles</p>
+            <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-zinc-100 pt-16">
+                <div>
+                    <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold text-black mb-4">Territorio</h4>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Exploro la relación entre el paisaje social y las huellas de la movilización popular en diversas provincias del país.</p>
+                </div>
+                <div>
+                    <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold text-black mb-4">Memoria</h4>
+                    <p class="text-sm text-zinc-500 leading-relaxed">El archivo fotográfico como un recurso vivo contra el olvido y una herramienta de sensibilización social.</p>
+                </div>
+                <div>
+                    <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold text-black mb-4">Ética</h4>
+                    <p class="text-sm text-zinc-500 leading-relaxed">Un compromiso con la transparencia y el respeto hacia las comunidades y personas registradas.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-12 text-center border-t border-zinc-50">
+        <p class="text-[9px] tracking-[0.5em] text-zinc-300 uppercase">© 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.</p>
     </footer>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
