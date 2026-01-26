@@ -7,65 +7,99 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        .gallery-item:hover img { transform: scale(1.02); transition: all 0.5s ease; }
+        html { scroll-behavior: smooth; }
+        .gallery-container {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 768px) { .gallery-container { column-count: 2; } }
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body class="bg-white text-zinc-900 font-light">
 
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-xs uppercase tracking-[0.2em] flex items-center gap-2 hover:text-zinc-500 transition">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al inicio
+            <a href="index.html" class="text-xs uppercase tracking-[0.2em] flex items-center gap-2 hover:text-orange-600 transition">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
             </a>
-            <h1 class="text-sm font-bold tracking-tighter uppercase">FotosDeLucha</h1>
+            <h1 class="text-sm font-bold tracking-tighter uppercase tracking-widest">FotosDeLucha</h1>
         </div>
     </nav>
 
     <header class="pt-32 pb-16 px-6">
         <div class="max-w-4xl mx-auto">
-            <span class="text-orange-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Proyecto Documental</span>
-            <h2 class="text-5xl font-light mb-8">FotosDeLucha</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm border-t border-zinc-100 pt-8">
+            <span class="text-orange-600 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Investigación Visual</span>
+            <h2 class="text-5xl font-light mb-8 text-zinc-900">FotosDeLucha</h2>
+            
+            <p class="text-xl text-zinc-600 leading-relaxed mb-12 text-justify">
+                Esta iniciativa autogestionada se dedica a registrar los procesos sociales y las expresiones populares en las distintas regiones del Perú. El proyecto busca establecer un diálogo entre la cámara y el entorno, documentando la memoria viva de las luchas sociales.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs border-t border-zinc-100 pt-8">
                 <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Ubicación</h4>
-                    <p>Regiones del Perú</p>
+                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Proyecto</h4>
+                    <p>FotosDeLucha</p>
                 </div>
                 <div>
                     <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Año</h4>
                     <p>2022 - Presente</p>
                 </div>
                 <div>
-                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">Enfoque</h4>
-                    <p>Procesos sociales y expresiones populares</p>
+                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">País</h4>
+                    <p>Perú</p>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase tracking-widest text-zinc-400 mb-2">IG</h4>
+                    <a href="https://www.instagram.com/fotosdelucha.pe/" class="text-orange-600 hover:underline">@fotosdelucha.pe</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="px-6 py-12 bg-zinc-50">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+    <section class="px-6 pb-24">
+        <div class="max-w-6xl mx-auto gallery-container">
             
-            <div class="md:col-span-2 overflow-hidden bg-zinc-200 aspect-video">
-                <img src="img/portfolio-018.jpg" class="w-full h-full object-cover" alt="Registro FotosDeLucha">
+            <div class="gallery-item">
+                <img src="img/portfolio-018.jpg" class="w-full h-auto" alt="FotosDeLucha Registro">
             </div>
 
-            <div class="overflow-hidden bg-zinc-200 aspect-square gallery-item">
-                <img src="img/fotonueva2.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0" alt="Detalle 1">
-            </div>
-            <div class="overflow-hidden bg-zinc-200 aspect-square gallery-item">
-                <img src="img/fotonueva3.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0" alt="Detalle 2">
+            <div class="gallery-item">
+                <img src="img/portfolio-001.jpg" class="w-full h-auto" alt="Procesos sociales Perú">
             </div>
 
-            <div class="md:col-span-2 py-16 max-w-2xl">
-                <p class="text-xl leading-relaxed text-zinc-600">
-                    FotosDeLucha nace como una necesidad de registrar no solo el evento político, sino la vivencia cotidiana de quienes sostienen las luchas sociales en el Perú. Este archivo busca ser un testimonio visual que dialogue con la memoria colectiva y el presente.
-                </p>
+            <div class="gallery-item">
+                <img src="img/portfolio-002.jpg" class="w-full h-auto" alt="Expresiones populares">
             </div>
+
+            <div class="gallery-item">
+                <img src="img/portfolio-003.jpg" class="w-full h-auto" alt="Kevin Puelles Fotografía">
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/portfolio-009.jpg" class="w-full h-auto" alt="Documental Perú">
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/portfolio-010.jpg" class="w-full h-auto" alt="Investigación visual">
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/portfolio-011.jpg" class="w-full h-auto" alt="Registro social">
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/portfolio-013.jpg" class="w-full h-auto" alt="Luchas sociales Perú">
+            </div>
+
         </div>
     </section>
 
-    <footer class="py-24 text-center">
-        <a href="index.html#portafolio" class="px-8 py-3 border border-zinc-900 uppercase tracking-widest text-xs hover:bg-zinc-900 hover:text-white transition duration-500">Siguiente Proyecto</a>
+    <footer class="py-12 border-t border-zinc-100 text-center">
+        <a href="index.html#portafolio" class="text-xs uppercase tracking-widest hover:text-orange-600 transition">Siguiente Proyecto</a>
     </footer>
 
     <script>lucide.createIcons();</script>
