@@ -8,11 +8,8 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         html { scroll-behavior: smooth; }
-        .slide { display: none; transition: opacity 1s ease-in-out; }
-        .slide.active { display: block; }
-        /* Estilo sutil para enlaces de texto */
-        .link-underlined { border-bottom: 1px solid #d4d4d8; transition: border-color 0.3s; }
-        .link-underlined:hover { border-color: #000; }
+        .slide { display: none; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .slide.active { display: block; opacity: 1; }
     </style>
 </head>
 <body class="bg-white text-zinc-900 font-light">
@@ -22,94 +19,35 @@
             <h1 class="text-xl font-bold tracking-tighter uppercase">Kevin Puelles</h1>
             <div class="space-x-8 hidden md:flex text-xs uppercase tracking-[0.2em]">
                 <a href="#inicio" class="hover:text-zinc-500 transition">Inicio</a>
-                <a href="#sobre-mi" class="hover:text-zinc-500 transition">Sobre mí</a>
+                <a href="sobre-mi.html" class="hover:text-zinc-500 transition">Sobre mí</a>
                 <a href="#portafolio" class="hover:text-zinc-500 transition">Portafolio</a>
                 <a href="#contacto" class="hover:text-zinc-500 transition">Contacto</a>
             </div>
         </div>
     </nav>
 
-   <section id="inicio" class="relative h-screen overflow-hidden bg-black">
-    <div class="slide active relative h-full">
-        <img src="img/portfolio-007.jpg" class="w-full h-full object-cover opacity-60">
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-            <h2 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Mirada cercana</h2>
-            <a href="#portafolio" class="mt-6 px-8 py-3 border border-white text-white uppercase tracking-widest text-xs hover:bg-white hover:text-black transition duration-500">Ver portafolio</a>
-        </div>
-    </div>
-    
-    <div class="slide relative h-full">
-        <img src="img/portfolio-010.jpg" class="w-full h-full object-cover opacity-60">
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-            <h2 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Capturando la realidad</h2>
-            <a href="#portafolio" class="mt-6 px-8 py-3 border border-white text-white uppercase tracking-widest text-xs hover:bg-white hover:text-black transition duration-500">Ver portafolio</a>
-        </div>
-    </div>
-
-    <div class="slide relative h-full">
-        <img src="img/portfolio-011.jpg" class="w-full h-full object-cover opacity-60">
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-            <h2 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Historias humanas</h2>
-            <a href="#portafolio" class="mt-6 px-8 py-3 border border-white text-white uppercase tracking-widest text-xs hover:bg-white hover:text-black transition duration-500">Ver portafolio</a>
-        </div>
-    </div>
-</section>
-
-<script>
-    // Inicializar Iconos (Lucide)
-    lucide.createIcons();
-
-    // Lógica del Slider
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    
-    function nextSlide() {
-        // Quitar clase activa del slide actual
-        slides[currentSlide].classList.remove('active');
-        // Transición de opacidad manual para suavizar
-        slides[currentSlide].style.opacity = 0;
-        
-        // Calcular siguiente slide
-        currentSlide = (currentSlide + 1) % slides.length;
-        
-        // Activar siguiente slide
-        slides[currentSlide].classList.add('active');
-        slides[currentSlide].style.opacity = 1;
-    }
-    
-    // Configurado a 7000ms (7 segundos) para una transición más lenta
-    if(slides.length > 0) {
-        setInterval(nextSlide, 7000);
-    }
-</script>
-
-    <section id="sobre-mi" class="py-24 bg-white px-6 border-b border-zinc-50">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-16">
-            <div class="w-full md:w-1/2 lg:w-5/12">
-                <div class="relative">
-                    <div class="aspect-[4/5] overflow-hidden bg-zinc-100 shadow-sm">
-                        <img src="img/ProfileKevinPuelles.webp" alt="Kevin Puelles" class="w-full h-full object-cover">
-                    </div>
-                </div>
+    <section id="inicio" class="relative h-screen overflow-hidden bg-black">
+        <div class="slide active relative h-full">
+            <img src="img/portfolio-007.jpg" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+                <h2 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Mirada cercana</h2>
+                <a href="#portafolio" class="mt-6 px-8 py-3 border border-white text-white uppercase tracking-widest text-xs hover:bg-white hover:text-black transition duration-500">Ver portafolio</a>
             </div>
-            <div class="w-full md:w-1/2 lg:w-7/12">
-                <span class="text-zinc-400 uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Sobre el autor</span>
-                <h2 class="text-4xl font-light mb-8 text-zinc-900">Kevin Puelles</h2>
-                <div class="space-y-6 text-zinc-600 text-lg leading-relaxed text-justify">
-                    <p>
-                        Soy <span class="text-black font-medium">fotógrafo documental e investigador visual</span>. Mi trabajo se centra en documentar la realidad social y las historias humanas con una mirada honesta y comprometida. Creo en la fotografía como un modo de estar: mirar con respeto, comprender con tiempo y narrar con transparencia.
-                    </p>
-                    <p>
-                        Desde 2022, dirijo <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="text-black font-medium link-underlined">FotosDeLucha</a>, una iniciativa autogestionada dedicada a registrar los procesos sociales y las expresiones populares en las distintas regiones del Perú. Mi enfoque busca ir más allá del registro, intentando establecer un diálogo entre la cámara y el entorno.
-                    </p>
-                    <p>
-                        En paralelo, realizo coberturas fotográficas para instituciones y organizaciones, aplicando la misma sensibilidad documental a la fotografía de eventos, retratos y proyectos institucionales.
-                    </p>
-                </div>
-                <div class="mt-12 pt-8 border-t border-zinc-100 flex gap-8 items-center text-zinc-400">
-                    <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="hover:text-black transition-colors"><i data-lucide="instagram"></i></a>
-                    <a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="hover:text-black transition-colors"><i data-lucide="message-circle"></i></a>
-                </div>
+        </div>
+        
+        <div class="slide relative h-full">
+            <img src="img/portfolio-010.jpg" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+                <h2 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Capturando la realidad</h2>
+                <a href="#portafolio" class="mt-6 px-8 py-3 border border-white text-white uppercase tracking-widest text-xs hover:bg-white hover:text-black transition duration-500">Ver portafolio</a>
+            </div>
+        </div>
+
+        <div class="slide relative h-full">
+            <img src="img/portfolio-011.jpg" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+                <h2 class="text-4xl md:text-6xl font-light mb-4 tracking-tight">Historias humanas</h2>
+                <a href="#portafolio" class="mt-6 px-8 py-3 border border-white text-white uppercase tracking-widest text-xs hover:bg-white hover:text-black transition duration-500">Ver portafolio</a>
             </div>
         </div>
     </section>
@@ -120,6 +58,7 @@
                 <span class="text-zinc-400 uppercase tracking-[0.3em] text-xs font-bold mb-2 block">Trabajos seleccionados</span>
                 <h2 class="text-4xl font-light text-zinc-900">Portafolio</h2>
             </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <a href="fotos-de-lucha.html" class="group block cursor-pointer">
                     <div class="relative overflow-hidden aspect-[16/10] bg-zinc-200">
@@ -146,24 +85,52 @@
         </div>
     </section>
 
-    <footer id="contacto" class="py-24 bg-white px-6 text-center border-t border-zinc-100">
-        <h2 class="text-3xl font-light mb-8 font-serif">¿Hablamos?</h2>
-        <div class="flex justify-center gap-12 text-zinc-500">
-            <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="flex items-center gap-2 hover:text-black transition">
-                <i data-lucide="instagram" class="w-5 h-5"></i> Instagram
-            </a>
-            <a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="flex items-center gap-2 hover:text-black transition">
-                <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
-            </a>
+    <section id="contacto" class="py-24 bg-white px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-zinc-400 uppercase tracking-[0.3em] text-xs font-bold mb-2 block">Contacto</span>
+                <h2 class="text-4xl font-light text-zinc-900">¿Tienes un proyecto en mente?</h2>
+            </div>
+
+            <form action="https://formspree.io/f/TU_ID_AQUÍ" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-zinc-500 mb-2">Nombre</label>
+                    <input type="text" name="name" required class="w-full border-b border-zinc-200 py-3 focus:border-black outline-none transition-colors bg-transparent">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-zinc-500 mb-2">Email</label>
+                    <input type="email" name="_replyto" required class="w-full border-b border-zinc-200 py-3 focus:border-black outline-none transition-colors bg-transparent">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs uppercase tracking-widest text-zinc-500 mb-2">Mensaje</label>
+                    <textarea name="message" rows="4" required class="w-full border-b border-zinc-200 py-3 focus:border-black outline-none transition-colors bg-transparent resize-none"></textarea>
+                </div>
+                <div class="md:col-span-2 text-center mt-8">
+                    <button type="submit" class="px-12 py-4 bg-zinc-900 text-white text-xs uppercase tracking-[0.2em] hover:bg-orange-600 transition duration-500">
+                        Enviar Mensaje
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-24 pt-12 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-8 text-zinc-500">
+                <div class="flex gap-8">
+                    <a href="https://www.instagram.com/fotosdelucha.pe/" target="_blank" class="flex items-center gap-2 hover:text-black transition">
+                        <i data-lucide="instagram" class="w-5 h-5"></i> <span class="text-xs uppercase tracking-widest">Instagram</span>
+                    </a>
+                    <a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="flex items-center gap-2 hover:text-black transition">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i> <span class="text-xs uppercase tracking-widest">WhatsApp</span>
+                    </a>
+                </div>
+                <p class="text-[10px] uppercase tracking-[0.4em] text-zinc-400">© 2026 Kevin Puelles</p>
+            </div>
         </div>
-        <p class="mt-16 text-[10px] uppercase tracking-[0.4em] text-zinc-400">© 2026 Kevin Puelles</p>
-    </footer>
+    </section>
 
     <script>
         // Inicializar Iconos
         lucide.createIcons();
 
-        // Lógica del Slider
+        // Lógica del Slider (7 segundos de intervalo)
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -174,9 +141,8 @@
         }
         
         if(slides.length > 0) {
-            setInterval(nextSlide, 5000);
+            setInterval(nextSlide, 7000);
         }
     </script>
 </body>
 </html>
-
