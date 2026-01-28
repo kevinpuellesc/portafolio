@@ -17,16 +17,14 @@
         #mobile-overlay.hidden { display: none; }
         #mobile-overlay.flex { display: flex; }
 
-        /* Ajuste para las imágenes de portada */
+        /* Imágenes de portada siempre a color */
         .project-image {
             height: 60vh;
             width: 100%;
             object-fit: cover;
-            filter: grayscale(100%);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .group:hover .project-image {
-            filter: grayscale(0%);
             transform: scale(1.03);
         }
     </style>
@@ -73,7 +71,7 @@
                 
                 <a href="fotosdelucha.html" class="group block reveal active">
                     <div class="overflow-hidden mb-8 bg-zinc-100">
-                        <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-011.jpg" 
+                        <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-018.jpg" 
                              class="project-image" 
                              alt="FotosDeLucha">
                     </div>
