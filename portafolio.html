@@ -1,35 +1,141 @@
-<section class="px-6 max-w-[1800px] mx-auto pb-20">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Kevin Puelles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
+        .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
         
-        <a href="fotosdelucha.html" class="group block reveal active">
-            <div class="overflow-hidden mb-6 bg-zinc-100">
-                <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-011.jpg" 
-                     class="w-full h-[60vh] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
-                     alt="FotosDeLucha">
-            </div>
-            <div class="flex justify-between items-end">
-                <div>
-                    <h2 class="font-roboto-black text-3xl uppercase tracking-tighter">FotosDeLucha</h2>
-                    <p class="text-zinc-500 font-light mt-1">Iniciativa fotográfica documental sobre el proceso popular peruano.</p>
-                </div>
-                <span class="text-[10px] uppercase tracking-widest text-zinc-400">2022 — Actualidad</span>
-            </div>
-        </a>
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        <a href="martires.html" class="group block reveal active">
-            <div class="overflow-hidden mb-6 bg-zinc-100">
-                <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/deudos-028.webp" 
-                     class="w-full h-[60vh] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
-                     alt="Mártires, deudos y víctimas">
-            </div>
-            <div class="flex justify-between items-end">
-                <div>
-                    <h2 class="font-roboto-black text-3xl uppercase tracking-tighter">Mártires, deudos y víctimas</h2>
-                    <p class="text-zinc-500 font-light mt-1">Acompañamiento fotográfico a los afectados por la violencia estatal.</p>
-                </div>
-                <span class="text-[10px] uppercase tracking-widest text-zinc-400">2022 — Presente</span>
-            </div>
-        </a>
+        #mobile-overlay.hidden { display: none; }
+        #mobile-overlay.flex { display: flex; }
 
+        /* Ajuste para las imágenes de portada */
+        .project-image {
+            height: 60vh;
+            width: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .group:hover .project-image {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="text-zinc-900 overflow-x-hidden">
+
+    <nav class="fixed w-full z-[100] bg-white/95 px-6 py-6 border-b border-zinc-100">
+        <div class="max-w-[1800px] mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
+            <div class="hidden md:flex space-x-12 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-400">
+                <a href="index.html" class="hover:text-black transition">Inicio</a>
+                <a href="portafolio.html" class="text-black font-bold">Portafolio</a>
+                <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
+                <a href="contacto.html" class="hover:text-black transition">Contacto</a>
+            </div>
+            <button class="md:hidden text-black block p-2" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="index.html" class="font-light">Inicio</a>
+        <a href="portafolio.html" class="font-bold">Portafolio</a>
+        <a href="sobre-mi.html" class="font-light">Sobre mí</a>
+        <a href="contacto.html" class="font-light">Contacto</a>
     </div>
-</section>
+
+    <main class="pt-32 md:pt-48 pb-10">
+        
+        <section class="px-6 max-w-[1800px] mx-auto mb-16 md:mb-24">
+            <div class="reveal active">
+                <h1 class="font-roboto-black text-6xl md:text-9xl uppercase tracking-tighter leading-none">
+                    Portafolio
+                </h1>
+            </div>
+        </section>
+
+        <section class="px-6 max-w-[1800px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
+                
+                <a href="fotosdelucha.html" class="group block reveal active">
+                    <div class="overflow-hidden mb-8 bg-zinc-100">
+                        <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-011.jpg" 
+                             class="project-image" 
+                             alt="FotosDeLucha">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                        <div class="max-w-xl">
+                            <h2 class="font-roboto-black text-3xl md:text-4xl uppercase tracking-tighter">FotosDeLucha</h2>
+                            <p class="text-zinc-500 font-light mt-2 text-lg">Iniciativa fotográfica documental sobre el proceso nacional y popular peruano.</p>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold">2022 — Actualidad</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="martires.html" class="group block reveal active">
+                    <div class="overflow-hidden mb-8 bg-zinc-100">
+                        <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/deudos-028.webp" 
+                             class="project-image" 
+                             alt="Mártires, deudos y víctimas">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                        <div class="max-w-xl">
+                            <h2 class="font-roboto-black text-3xl md:text-4xl uppercase tracking-tighter">Mártires, deudos y víctimas</h2>
+                            <p class="text-zinc-500 font-light mt-2 text-lg">Acompañamiento fotográfico a los afectados por la violencia estatal.</p>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold">2022 — Presente</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 text-center px-6 border-t border-zinc-50 mt-20">
+        <p class="text-[9px] tracking-[0.5em] text-zinc-300 uppercase">
+            © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleMenu() {
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.toggle('hidden');
+            overlay.classList.toggle('flex');
+            document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
+        }
+
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) el.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
