@@ -11,15 +11,22 @@
         body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
         .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
         
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Hero Section Styling */
+        /* HERO OPTIMIZADO */
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Portadaprincipal.jpg');
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Portadaprincipal.jpg');
             background-size: cover;
-            background-position: center;
+            background-position: center 20%;
             height: 100vh;
+            height: 100dvh;
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-position: center center;
+            }
         }
 
         #mobile-overlay.hidden { display: none; }
@@ -27,16 +34,16 @@
 </head>
 <body class="text-zinc-900 overflow-x-hidden">
 
-    <nav class="fixed w-full z-[100] bg-white/10 backdrop-blur-sm md:bg-transparent px-6 py-6 transition-colors duration-500" id="main-nav">
+    <nav class="fixed w-full z-[100] px-6 py-6 transition-all duration-500" id="main-nav">
         <div class="max-w-[1800px] mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-white drop-shadow-md">Kevin Puelles</a>
+            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-white drop-shadow-sm" id="nav-logo">Kevin Puelles</a>
             <div class="hidden md:flex space-x-12 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-100">
                 <a href="index.html" class="hover:text-white transition border-b border-white/40 pb-1">Inicio</a>
                 <a href="portafolio.html" class="hover:text-white transition">Portafolio</a>
                 <a href="sobre-mi.html" class="hover:text-white transition">Sobre mí</a>
-                <a href="contacto.html" class="hover:text-white transition">Contacto</a>
+                <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
-            <button class="md:hidden text-white block p-2" onclick="toggleMenu()">
+            <button class="text-white block p-2 md:hidden" id="nav-btn" onclick="toggleMenu()">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
@@ -52,87 +59,70 @@
         <a href="contacto.html" class="font-light">Contacto</a>
     </div>
 
-    <header class="hero-bg flex items-center justify-center text-center px-6">
-        <div class="reveal active">
-            <h1 class="font-roboto-black text-6xl md:text-9xl uppercase tracking-tighter leading-none text-white drop-shadow-2xl">
-                Retratando el <br> presente
+    <header class="hero-bg flex items-end md:items-center justify-center text-center px-6 pb-20 md:pb-0">
+        <div class="reveal active w-full">
+            <h1 class="font-roboto-black text-5xl md:text-9xl uppercase tracking-tighter leading-tight text-white drop-shadow-2xl">
+                Retratando <br class="hidden md:block"> el presente
             </h1>
-            <p class="mt-8 text-white/80 text-[10px] md:text-xs uppercase tracking-[0.6em] font-light">
-                Fotografía Documental & Etnografía Visual
+            <p class="mt-6 text-white/90 text-[10px] md:text-xs uppercase tracking-[0.4em] font-medium">
+                Fotografía Documental & Etnografía
             </p>
-            <div class="mt-12">
-                <a href="#featured" class="inline-block p-4 border border-white/30 rounded-full text-white hover:bg-white hover:text-black transition-all">
-                    <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
+            <div class="mt-10 md:mt-12">
+                <a href="#featured" class="inline-block p-3 md:p-4 border border-white/40 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                    <i data-lucide="arrow-down" class="w-5 h-5 md:w-6 md:h-6 animate-bounce"></i>
                 </a>
             </div>
         </div>
     </header>
 
     <main>
-        <section class="py-24 md:py-40 px-6 bg-white text-center">
-            <div class="max-w-4xl mx-auto reveal">
-                <h2 class="text-zinc-400 text-[10px] uppercase tracking-[0.5em] mb-12">Filosofía</h2>
-                <p class="text-2xl md:text-5xl font-light leading-snug text-zinc-800">
-                    "Mi trabajo se sitúa en la intersección entre el testimonio histórico y la sensibilidad humana, capturando la esencia de los procesos sociales en el Perú."
+        <section class="py-20 md:py-40 px-6 bg-white">
+            <div class="max-w-4xl mx-auto reveal text-center">
+                <p class="text-lg md:text-4xl font-light leading-snug text-zinc-800">
+                    "Mi trabajo se sitúa en la intersección entre el testimonio histórico y la sensibilidad humana."
                 </p>
+                <div class="w-12 h-[1px] bg-zinc-300 mx-auto mt-10"></div>
             </div>
         </section>
 
-        <section id="featured" class="px-6 py-20 bg-zinc-50">
+        <section id="featured" class="px-6 pb-20 md:py-20 bg-zinc-50">
             <div class="max-w-[1800px] mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-                    <div class="reveal">
-                        <h2 class="font-roboto-black text-4xl md:text-6xl uppercase tracking-tighter">Historias <br> Destacadas</h2>
-                    </div>
-                    <div class="reveal">
-                        <a href="portafolio.html" class="text-[11px] uppercase tracking-[0.3em] font-bold border-b-2 border-black pb-2 hover:opacity-50 transition">
-                            Explorar Portafolio Completo
-                        </a>
-                    </div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
+                    <h2 class="font-roboto-black text-4xl md:text-6xl uppercase tracking-tighter leading-none">Historias <br> Destacadas</h2>
+                    <a href="portafolio.html" class="text-[10px] uppercase tracking-[0.3em] font-bold border-b border-black pb-1">
+                        Ver todo
+                    </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
                     <a href="fotos-de-lucha.html" class="group reveal">
-                        <div class="aspect-[4/5] overflow-hidden mb-6">
-                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-018.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="aspect-[3/4] overflow-hidden mb-4">
+                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-018.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                         </div>
-                        <h3 class="font-bold uppercase tracking-widest text-sm">FotosDeLucha</h3>
-                        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-tighter">Lucha social y política</p>
+                        <h3 class="font-bold uppercase tracking-widest text-xs">FotosDeLucha</h3>
                     </a>
 
                     <a href="compadres.html" class="group reveal">
-                        <div class="aspect-[4/5] overflow-hidden mb-6">
-                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/CompadresChacayan000.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="aspect-[3/4] overflow-hidden mb-4">
+                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/CompadresChacayan000.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                         </div>
-                        <h3 class="font-bold uppercase tracking-widest text-sm">Chacayán</h3>
-                        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-tighter">Etnografía y Tradición</p>
+                        <h3 class="font-bold uppercase tracking-widest text-xs">Chacayán</h3>
                     </a>
 
-                    <a href="martires.html" class="group reveal">
-                        <div class="aspect-[4/5] overflow-hidden mb-6">
-                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/deudos-028.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <a href="bodaayapata.html" class="group reveal">
+                        <div class="aspect-[3/4] overflow-hidden mb-4">
+                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/BodaAyapata-040.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                         </div>
-                        <h3 class="font-bold uppercase tracking-widest text-sm">Mártires</h3>
-                        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-tighter">Memoria y Derechos Humanos</p>
+                        <h3 class="font-bold uppercase tracking-widest text-xs">Boda en Ayapata</h3>
                     </a>
                 </div>
-            </div>
-        </section>
-
-        <section class="py-24 md:py-40 px-6 bg-black text-white text-center">
-            <div class="max-w-4xl mx-auto reveal">
-                <p class="text-[10px] uppercase tracking-[0.5em] mb-8 text-zinc-500">¿Tienes un proyecto en mente?</p>
-                <h2 class="text-4xl md:text-7xl font-roboto-black uppercase tracking-tighter mb-12 italic">Disponible para <br> asignaciones</h2>
-                <a href="contacto.html" class="inline-block bg-white text-black text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-200 transition-all">
-                    Escribir ahora
-                </a>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 text-center px-6 bg-black border-t border-zinc-900">
-        <p class="text-[9px] tracking-[0.5em] text-zinc-600 uppercase">
-            © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
+    <footer class="py-12 text-center px-6 bg-white border-t border-zinc-100">
+        <p class="text-[9px] tracking-[0.5em] text-zinc-400 uppercase">
+            © 2026 Kevin Puelles
         </p>
     </footer>
 
@@ -146,32 +136,31 @@
             document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
         }
 
+        window.addEventListener("scroll", () => {
+            const nav = document.getElementById('main-nav');
+            const logo = document.getElementById('nav-logo');
+            const btn = document.getElementById('nav-btn');
+            
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/95', 'py-4', 'border-b', 'border-zinc-100');
+                logo.classList.replace('text-white', 'text-black');
+                btn.classList.replace('text-white', 'text-black');
+            } else {
+                nav.classList.remove('bg-white/95', 'py-4', 'border-b', 'border-zinc-100');
+                logo.classList.replace('text-black', 'text-white');
+                btn.classList.replace('text-black', 'text-white');
+            }
+        });
+
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             reveals.forEach(el => {
                 let windowHeight = window.innerHeight;
                 let elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) el.classList.add("active");
+                if (elementTop < windowHeight - 50) el.classList.add("active");
             });
         }
-
-        // Efecto scroll para la navegación
-        window.addEventListener("scroll", () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('bg-white/95', 'border-b', 'border-zinc-100');
-                nav.querySelector('a').classList.replace('text-white', 'text-black');
-                nav.querySelectorAll('.hidden a').forEach(a => a.classList.replace('text-zinc-100', 'text-zinc-400'));
-                nav.querySelector('button').classList.replace('text-white', 'text-black');
-            } else {
-                nav.classList.remove('bg-white/95', 'border-b', 'border-zinc-100');
-                nav.querySelector('a').classList.replace('text-black', 'text-white');
-                nav.querySelectorAll('.hidden a').forEach(a => a.classList.replace('text-zinc-400', 'text-zinc-100'));
-                nav.querySelector('button').classList.replace('text-black', 'text-white');
-            }
-            reveal();
-        });
-
+        window.addEventListener("scroll", reveal);
         reveal();
     </script>
 </body>
