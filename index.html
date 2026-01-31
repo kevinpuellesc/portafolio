@@ -3,193 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin Puelles | Fotografía Documental</title>
+    <title>Kevin Puelles | Retratando el presente</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
+        .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
         
-        .masonry-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            padding: 0 10px;
-        }
-        @media (min-width: 768px) {
-            .masonry-grid {
-                display: block;
-                column-count: 2;
-                column-gap: 10px;
-            }
-            .grid-item {
-                break-inside: avoid;
-                margin-bottom: 10px;
-                display: block;
-            }
-        }
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Hero Section Styling */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Portadaprincipal.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
         }
 
-        /* Bloques de texto - Fondo Negro Siempre */
-        .text-block-item {
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            transition: all 0.3s ease;
-            min-height: 260px; 
-            padding: 40px 30px;
-        }
-        
-        @media (min-width: 768px) {
-            .text-block-item {
-                min-height: 380px;
-                padding: 60px 40px;
-            }
-        }
-
-        .phrase-text {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 25px;
-        }
-
-        /* Botón Rectangular Blanco */
-        .btn-rect {
-            background-color: #fff;
-            color: #000;
-            padding: 12px 24px;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-weight: 700;
-            display: inline-block;
-            transition: opacity 0.3s ease;
-        }
-        .btn-rect:hover { opacity: 0.9; }
-
-        #mobile-menu { display: none; }
-        #mobile-menu.active { display: flex; }
+        #mobile-overlay.hidden { display: none; }
     </style>
 </head>
-<body class="bg-white text-zinc-900">
+<body class="text-zinc-900 overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 bg-white/95 border-b border-zinc-100 px-6 py-5">
+    <nav class="fixed w-full z-[100] bg-white/10 backdrop-blur-sm md:bg-transparent px-6 py-6 transition-colors duration-500" id="main-nav">
         <div class="max-w-[1800px] mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
-            <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-500">
-                <a href="index.html" class="text-black transition">Inicio</a>
-                <a href="portafolio.html" class="hover:text-black transition">Portafolio</a>
-                <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
-                <a href="contacto.html" class="hover:text-black transition">Contacto</a>
+            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-white drop-shadow-md">Kevin Puelles</a>
+            <div class="hidden md:flex space-x-12 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-100">
+                <a href="index.html" class="hover:text-white transition border-b border-white/40 pb-1">Inicio</a>
+                <a href="portafolio.html" class="hover:text-white transition">Portafolio</a>
+                <a href="sobre-mi.html" class="hover:text-white transition">Sobre mí</a>
+                <a href="contacto.html" class="hover:text-white transition">Contacto</a>
             </div>
-            <button class="md:hidden text-black" onclick="toggleMenu()">
-                <i data-lucide="menu"></i>
+            <button class="md:hidden text-white block p-2" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
-        <button class="absolute top-6 right-6" onclick="toggleMenu()"><i data-lucide="x"></i></button>
-        <a href="index.html" onclick="toggleMenu()">Inicio</a>
-        <a href="portafolio.html" onclick="toggleMenu()">Portafolio</a>
-        <a href="sobre-mi.html" onclick="toggleMenu()">Sobre mí</a>
-        <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="index.html" class="font-bold">Inicio</a>
+        <a href="portafolio.html" class="font-light">Portafolio</a>
+        <a href="sobre-mi.html" class="font-light">Sobre mí</a>
+        <a href="contacto.html" class="font-light">Contacto</a>
     </div>
 
-    <main class="pt-24 pb-10">
-        <div id="photo-grid" class="masonry-grid">
+    <header class="hero-bg flex items-center justify-center text-center px-6">
+        <div class="reveal active">
+            <h1 class="font-roboto-black text-6xl md:text-9xl uppercase tracking-tighter leading-none text-white drop-shadow-2xl">
+                Retratando el <br> presente
+            </h1>
+            <p class="mt-8 text-white/80 text-[10px] md:text-xs uppercase tracking-[0.6em] font-light">
+                Fotografía Documental & Etnografía Visual
+            </p>
+            <div class="mt-12">
+                <a href="#featured" class="inline-block p-4 border border-white/30 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                    <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
+                </a>
             </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-24 md:py-40 px-6 bg-white text-center">
+            <div class="max-w-4xl mx-auto reveal">
+                <h2 class="text-zinc-400 text-[10px] uppercase tracking-[0.5em] mb-12">Filosofía</h2>
+                <p class="text-2xl md:text-5xl font-light leading-snug text-zinc-800">
+                    "Mi trabajo se sitúa en la intersección entre el testimonio histórico y la sensibilidad humana, capturando la esencia de los procesos sociales en el Perú."
+                </p>
+            </div>
+        </section>
+
+        <section id="featured" class="px-6 py-20 bg-zinc-50">
+            <div class="max-w-[1800px] mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                    <div class="reveal">
+                        <h2 class="font-roboto-black text-4xl md:text-6xl uppercase tracking-tighter">Historias <br> Destacadas</h2>
+                    </div>
+                    <div class="reveal">
+                        <a href="portafolio.html" class="text-[11px] uppercase tracking-[0.3em] font-bold border-b-2 border-black pb-2 hover:opacity-50 transition">
+                            Explorar Portafolio Completo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <a href="fotos-de-lucha.html" class="group reveal">
+                        <div class="aspect-[4/5] overflow-hidden mb-6">
+                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-018.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <h3 class="font-bold uppercase tracking-widest text-sm">FotosDeLucha</h3>
+                        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-tighter">Lucha social y política</p>
+                    </a>
+
+                    <a href="compadres.html" class="group reveal">
+                        <div class="aspect-[4/5] overflow-hidden mb-6">
+                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/CompadresChacayan000.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <h3 class="font-bold uppercase tracking-widest text-sm">Chacayán</h3>
+                        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-tighter">Etnografía y Tradición</p>
+                    </a>
+
+                    <a href="martires.html" class="group reveal">
+                        <div class="aspect-[4/5] overflow-hidden mb-6">
+                            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/deudos-028.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <h3 class="font-bold uppercase tracking-widest text-sm">Mártires</h3>
+                        <p class="text-zinc-500 text-xs mt-2 uppercase tracking-tighter">Memoria y Derechos Humanos</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 md:py-40 px-6 bg-black text-white text-center">
+            <div class="max-w-4xl mx-auto reveal">
+                <p class="text-[10px] uppercase tracking-[0.5em] mb-8 text-zinc-500">¿Tienes un proyecto en mente?</p>
+                <h2 class="text-4xl md:text-7xl font-roboto-black uppercase tracking-tighter mb-12 italic">Disponible para <br> asignaciones</h2>
+                <a href="contacto.html" class="inline-block bg-white text-black text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-200 transition-all">
+                    Escribir ahora
+                </a>
+            </div>
+        </section>
     </main>
 
-    <footer class="py-24 text-center px-6 border-t border-zinc-50">
-        <div class="flex flex-col items-center gap-8">
-            <a href="contacto.html" class="group inline-flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] font-bold text-black border border-black px-12 py-4 hover:bg-black hover:text-white transition-all duration-500">
-                Cuéntame tu idea
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-            <p class="mt-12 text-[9px] tracking-[0.5em] text-zinc-300 uppercase">© 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.</p>
-        </div>
+    <footer class="py-12 text-center px-6 bg-black border-t border-zinc-900">
+        <p class="text-[9px] tracking-[0.5em] text-zinc-600 uppercase">
+            © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
+        </p>
     </footer>
 
     <script>
         lucide.createIcons();
 
         function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('active');
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.toggle('hidden');
+            overlay.classList.toggle('flex');
+            document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
         }
 
-        const images = [
-            "img/portfolio-018.jpg", "img/portfolio-003.webp", "img/portfolio-020.webp",
-            "img/portfolio-005.webp", "img/portfolio-007.webp", "img/portfolio-008.webp",
-            "img/portfolio-012.webp", "img/portfolio-021.webp",
-            "img/portfolio-014.webp", "img/portfolio-016.webp", "img/portfolio-022.webp",
-            "img/portfolio-017.webp", "img/portfolio-023.webp", "img/portfolio-001C.webp",
-            "img/portfolio-002C.webp", "img/portfolio-003C.webp", "img/portfolio-004C.webp",
-            "img/portfolio-005C.webp", "img/portfolio-001cc.webp", "img/portfolio-002cc.webp"
-        ];
-
-        const phrases = [
-            "Más que un registro, es una relación entre la cámara y el entorno.",
-            "De las ideas a las imágenes.",
-            "La fotografía es el retrato del tiempo."
-        ];
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) el.classList.add("active");
+            });
         }
 
-        let shuffledImages = shuffle([...images]);
-        let shuffledPhrases = shuffle([...phrases]);
-        
-        let items = shuffledImages.map(img => ({ type: 'image', content: img }));
-        
-        // Mantener las frases separadas al menos por 4 fotos
-        let positions = [
-            Math.floor(Math.random() * 3) + 1,
-            Math.floor(Math.random() * 5) + 8,
-            Math.floor(Math.random() * 4) + 16
-        ];
-
-        positions.forEach((pos, i) => {
-            if (shuffledPhrases[i]) {
-                items.splice(pos, 0, { type: 'text', content: shuffledPhrases[i] });
-            }
-        });
-
-        const grid = document.getElementById('photo-grid');
-        items.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'grid-item';
-            
-            if (item.type === 'image') {
-                div.innerHTML = `<img src="${item.content}" alt="Kevin Puelles">`;
+        // Efecto scroll para la navegación
+        window.addEventListener("scroll", () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/95', 'border-b', 'border-zinc-100');
+                nav.querySelector('a').classList.replace('text-white', 'text-black');
+                nav.querySelectorAll('.hidden a').forEach(a => a.classList.replace('text-zinc-100', 'text-zinc-400'));
+                nav.querySelector('button').classList.replace('text-white', 'text-black');
             } else {
-                div.innerHTML = `
-                    <div class="text-block-item">
-                        <p class="phrase-text text-2xl md:text-4xl">${item.content}</p>
-                        <a href="portafolio.html" class="btn-rect">Ver portafolio</a>
-                    </div>`;
+                nav.classList.remove('bg-white/95', 'border-b', 'border-zinc-100');
+                nav.querySelector('a').classList.replace('text-black', 'text-white');
+                nav.querySelectorAll('.hidden a').forEach(a => a.classList.replace('text-zinc-400', 'text-zinc-100'));
+                nav.querySelector('button').classList.replace('text-black', 'text-white');
             }
-            grid.appendChild(div);
+            reveal();
         });
 
-        lucide.createIcons();
+        reveal();
     </script>
 </body>
 </html>
-
