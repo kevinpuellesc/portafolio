@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Mí | Kevin Puelles</title>
+    <title>Sobre mí | Kevin Puelles</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -15,11 +15,34 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         #mobile-overlay.hidden { display: none; }
+        #mobile-overlay.flex { display: flex; }
+
+        /* Masonry Layout Real - Sin recortes */
+        .masonry-container {
+            column-count: 2;
+            column-gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-container {
+                column-count: 3;
+                column-gap: 1.5rem;
+            }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .masonry-item {
+                margin-bottom: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="text-zinc-900 overflow-x-hidden">
 
-    <nav class="fixed w-full z-[100] bg-white/95 px-6 py-6 border-b border-zinc-100">
+    <nav class="fixed w-full z-[100] bg-white/95 px-6 py-6">
         <div class="max-w-[1800px] mx-auto flex justify-between items-center">
             <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
             <div class="hidden md:flex space-x-12 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-400">
@@ -28,58 +51,83 @@
                 <a href="sobre-mi.html" class="text-black font-bold">Sobre mí</a>
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
-            <button class="md:hidden text-black block p-2" onclick="toggleMenu()">
+            <button class="md:hidden text-black block p-2" onclick="toggleMenu()" id="btn-open">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
 
     <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
-        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()">
+        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()" id="btn-close">
             <i data-lucide="x" class="w-8 h-8"></i>
         </button>
-        <a href="index.html" class="font-light">Inicio</a>
-        <a href="portafolio.html" class="font-light">Portafolio</a>
-        <a href="sobre-mi.html" class="font-bold">Sobre mí</a>
-        <a href="contacto.html" class="font-light">Contacto</a>
+        <a href="index.html" onclick="toggleMenu()" class="font-light">Inicio</a>
+        <a href="portafolio.html" onclick="toggleMenu()" class="font-light">Portafolio</a>
+        <a href="sobre-mi.html" onclick="toggleMenu()" class="font-bold">Sobre mí</a>
+        <a href="contacto.html" onclick="toggleMenu()" class="font-light">Contacto</a>
     </div>
 
-    <main class="pt-32 md:pt-48">
-        <section class="px-6 max-w-[1800px] mx-auto mb-16 md:mb-24">
-            <div class="reveal active">
-                <h1 class="font-roboto-black text-6xl md:text-9xl uppercase tracking-tighter leading-none mb-12">
+    <main class="pt-32 md:pt-48 pb-10">
+        
+        <section class="px-6 max-w-7xl mx-auto">
+            <div class="mb-8 md:mb-12 reveal active">
+                <h1 class="font-roboto-black text-5xl md:text-9xl uppercase tracking-tighter leading-none whitespace-nowrap">
                     Sobre mí
                 </h1>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-24 items-start reveal active">
+                <div class="lg:col-span-5">
+                    <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/ProfileKevinPuelles.webp" alt="Kevin Puelles" class="w-full grayscale brightness-90 contrast-110">
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                    <div class="max-w-2xl space-y-6 text-lg md:text-xl font-light text-zinc-600 leading-relaxed">
-                        <p>
-                            Soy comunicador social y fotógrafo documental peruano. Mi trabajo se centra en el registro de procesos sociales, políticos y culturales, buscando testimoniar la realidad con un enfoque humano y transparente.
-                        </p>
-                        <p>
-                            A través de la fotografía, exploro la identidad de las comunidades y la fuerza de los movimientos sociales, entendiendo la imagen como una herramienta necesaria para la memoria colectiva y el cambio social.
-                        </p>
-                    </div>
-                    <div class="bg-zinc-50 aspect-square overflow-hidden">
-                        <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Portadaprincipal.jpg" class="w-full h-full object-cover">
-                    </div>
+                <div class="lg:col-span-7 space-y-6 text-lg md:text-xl font-light leading-relaxed text-zinc-600">
+                    <p>
+                        Como fotógrafo documental e investigador visual, mi trabajo busca establecer un diálogo entre la cámara y el entorno, con una mirada comprometida más allá del registro. Por eso, apasionado por la gente, viajo con frecuencia para acompañar y divulgar procesos sociales y culturales, convencido de que es posible retratar el <span class="text-black font-semibold">Corazón del Pueblo</span>.
+                    </p>
+                    <p>
+                        Soy fundador y director de <a href="fotos-de-lucha.html" class="text-black font-semibold underline underline-offset-4 hover:text-zinc-500 transition-colors">FotosDeLucha</a>, una iniciativa autogestionada dedicada a registrar y difundir el proceso nacional y popular peruano desde diciembre de 2022 hasta la fecha.
+                    </p>
+                    <p>
+                        En paralelo, realizo coberturas fotográficas para instituciones y organizaciones, aplicando la misma sensibilidad documental a la fotografía de eventos, retratos y proyectos institucionales.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="py-24 md:py-40 px-6 bg-black text-white text-center mt-12">
-            <div class="max-w-4xl mx-auto reveal">
-                <p class="text-[10px] uppercase tracking-[0.5em] mb-8 text-zinc-500">¿Tienes una historia que contar?</p>
-                <h2 class="text-4xl md:text-7xl font-roboto-black uppercase tracking-tighter mb-12 italic">Disponible para <br> asignaciones</h2>
-                <a href="contacto.html" class="inline-block bg-white text-black text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-200 transition-all w-full md:w-auto">
-                    Contactar ahora
-                </a>
+        <section class="px-6 max-w-7xl mx-auto mt-12 md:mt-20">
+            <div class="flex flex-col space-y-10 reveal active">
+                
+                <div class="max-w-4xl">
+                    <h2 class="font-roboto-black text-3xl md:text-5xl uppercase tracking-tighter leading-none mb-4">
+                        Trayectoria y <br>Publicaciones
+                    </h2>
+                    <p class="text-lg md:text-xl font-light leading-relaxed text-zinc-600">
+                        Mi trabajo se ha expuesto en espacios culturales y galerías de diferentes países como España, Estados Unidos, Alemania, Dinamarca, Bélgica, Argentina, entre otros. Así como en publicaciones y medios entre los que se encuentran la revista <span class="text-black font-medium">Rolling Stone</span> edición Argentina y <span class="text-black font-medium">Lateinamerika Nachrichten</span> de Alemania.
+                    </p>
+                </div>
+
+                <div class="masonry-container">
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/467604166_1473506423320072_8150217774243246732_n.jpeg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/476637521_588807050793002_1827828300874394390_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/483301875_18485743294015236_8650607519880300834_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/476640760_588807397459634_6791336341217412239_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/477582153_588807244126316_3648799548505928662_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/475647277_579496328390741_1987546194500993357_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                </div>
+
+                <div class="pt-2">
+                    <a href="contacto.html" class="inline-block bg-black text-white text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-800 transition-all w-full md:w-auto text-center">
+                        Cuéntame tu idea
+                    </a>
+                </div>
             </div>
         </section>
+
     </main>
 
-    <footer class="py-12 text-center px-6 bg-black border-t border-zinc-900 text-zinc-600">
-        <p class="text-[9px] tracking-[0.5em] uppercase">
+    <footer class="py-12 text-center px-6">
+        <p class="text-[9px] tracking-[0.5em] text-zinc-300 uppercase">
             © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
         </p>
     </footer>
@@ -88,17 +136,25 @@
         lucide.createIcons();
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
-            overlay.classList.toggle('hidden');
-            overlay.classList.toggle('flex');
-            document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
+            const isHidden = overlay.classList.contains('hidden');
+            if (isHidden) {
+                overlay.classList.remove('hidden'); overlay.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            } else {
+                overlay.classList.add('hidden'); overlay.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
         }
+
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
+            for (let i = 0; i < reveals.length; i++) {
                 let windowHeight = window.innerHeight;
-                let elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) el.classList.add("active");
-            });
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
         window.addEventListener("scroll", reveal);
         reveal();
