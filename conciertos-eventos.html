@@ -14,16 +14,14 @@
         .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Estilo para imágenes del grid */
         .gallery-img {
             width: 100%;
             height: auto;
             cursor: pointer;
             transition: transform 0.5s ease;
         }
-        .gallery-img:hover { transform: scale(1.02); }
+        .gallery-img:hover { transform: scale(1.01); }
 
-        /* Lightbox - Vista ampliada */
         #lightbox {
             display: none;
             position: fixed;
@@ -38,7 +36,6 @@
             max-width: 100%;
             max-height: 90vh;
             object-fit: contain;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -73,7 +70,8 @@
     </div>
 
     <main class="pt-32 md:pt-48">
-        <section class="px-6 max-w-[1800px] mx-auto mb-16">
+        
+        <section class="px-6 max-w-[1800px] mx-auto mb-16 md:mb-24">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
                 <div class="lg:col-span-8 reveal active">
                     <h1 class="font-roboto-black text-6xl md:text-9xl uppercase tracking-tighter leading-[0.85] mb-8">
@@ -84,44 +82,44 @@
                     </p>
                 </div>
                 
-                <div class="lg:col-span-4 reveal active pt-4">
+                <div class="lg:col-span-4 reveal active">
                     <div class="grid grid-cols-2 gap-8 md:block md:space-y-8 border-t md:border-t-0 md:border-l border-zinc-100 pt-8 md:pt-0 md:pl-12">
                         <div>
-                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-1">Periodo</span>
-                            <p class="text-sm">Permanente</p>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Periodo</span>
+                            <p class="text-[13px] font-medium uppercase tracking-wider">Permanente</p>
                         </div>
                         <div>
-                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-1">Cargo</span>
-                            <p class="text-sm">Fotógrafo</p>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Cargo</span>
+                            <p class="text-[13px] font-medium uppercase tracking-wider">Fotógrafo</p>
                         </div>
                         <div>
-                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-1">Localización</span>
-                            <p class="text-sm">Perú</p>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Localización</span>
+                            <p class="text-[13px] font-medium uppercase tracking-wider">Perú</p>
                         </div>
                         <div>
-                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-1">Formato</span>
-                            <p class="text-sm">Digital</p>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Formato</span>
+                            <p class="text-[13px] font-medium uppercase tracking-wider">Digital</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="w-full mb-24 reveal active">
+        <section class="w-full mb-24 md:mb-32 reveal active">
             <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-008.jpg" 
-                 class="w-full h-[60vh] md:h-[90vh] object-cover" alt="Imagen Principal">
+                 class="w-full h-[60vh] md:h-[90vh] object-cover" alt="Hero Principal">
         </section>
 
-        <section class="px-6 max-w-3xl mx-auto mb-24 text-center">
-            <div class="reveal">
-                <p class="text-lg md:text-xl text-zinc-500 font-light leading-relaxed">
+        <section class="px-6 max-w-[1800px] mx-auto mb-24 md:mb-32">
+            <div class="max-w-3xl reveal">
+                <p class="text-xl md:text-3xl font-light text-zinc-400 leading-relaxed italic">
                     Con la cámara siempre lista para retratar los mejores momentos de los conciertos y eventos, he acompañado diferentes presentaciones de artistas, principalmente durante fiestas patronales en el ande peruano.
                 </p>
             </div>
         </section>
 
         <section class="px-6 max-w-[1800px] mx-auto mb-32">
-            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
                 <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-006.jpg" class="gallery-img reveal" onclick="openLightbox(this.src)">
                 <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-010.jpg" class="gallery-img reveal" onclick="openLightbox(this.src)">
                 <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-001.jpg" class="gallery-img reveal" onclick="openLightbox(this.src)">
@@ -134,31 +132,32 @@
             </div>
         </section>
 
-        <section class="px-6 py-24 border-t border-zinc-100 max-w-[1800px] mx-auto">
-            <div class="flex justify-between items-center">
-                <a href="portafolio.html" class="text-[11px] font-bold uppercase tracking-widest flex items-center gap-2">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portafolio
-                </a>
-                <a href="fotos-de-lucha.html" class="text-[11px] font-bold uppercase tracking-widest flex items-center gap-2">
-                    Siguiente <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <section class="py-24 md:py-40 px-6 bg-black text-white text-center">
+            <div class="max-w-4xl mx-auto reveal">
+                <p class="text-[10px] uppercase tracking-[0.5em] mb-8 text-zinc-500">¿Necesitas cobertura para tu próximo evento?</p>
+                <h2 class="text-4xl md:text-7xl font-roboto-black uppercase tracking-tighter mb-12 italic">Disponible para <br> asignaciones</h2>
+                <a href="contacto.html" class="inline-block bg-white text-black text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-200 transition-all w-full md:w-auto">
+                    Contactar ahora
                 </a>
             </div>
         </section>
+
     </main>
 
-    <footer class="py-12 text-center bg-black text-zinc-600">
-        <p class="text-[9px] tracking-[0.5em] uppercase">© 2026 Kevin Puelles</p>
+    <footer class="py-12 text-center px-6 border-t border-zinc-900 bg-black text-zinc-600">
+        <p class="text-[9px] tracking-[0.5em] uppercase">
+            © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
+        </p>
     </footer>
 
     <script>
         lucide.createIcons();
-
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
             overlay.classList.toggle('hidden');
             overlay.classList.toggle('flex');
+            document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
         }
-
         function openLightbox(src) {
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
@@ -166,13 +165,11 @@
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
-
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
             lightbox.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             reveals.forEach(el => {
