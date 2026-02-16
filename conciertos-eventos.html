@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciertos y Eventos | Kevin Puelles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
+        .font-roboto-black { font-family: 'Roboto', sans-serif; font-weight: 900; }
+        
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        #mobile-overlay.hidden { display: none; }
+        
+        .hero-image {
+            height: 90vh;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: all 0.8s ease;
+        }
+        .gallery-img:hover {
+            filter: grayscale(0%);
+        }
+    </style>
+</head>
+<body class="text-zinc-900 overflow-x-hidden">
+
+    <nav class="fixed w-full z-[100] bg-white/95 px-6 py-6 border-b border-zinc-100">
+        <div class="max-w-[1800px] mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-lg font-semibold tracking-tighter uppercase text-black">Kevin Puelles</a>
+            <div class="hidden md:flex space-x-12 text-[11px] uppercase tracking-[0.2em] font-medium text-zinc-400">
+                <a href="index.html" class="hover:text-black transition">Inicio</a>
+                <a href="portafolio.html" class="hover:text-black transition">Portafolio</a>
+                <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
+                <a href="contacto.html" class="hover:text-black transition">Contacto</a>
+            </div>
+            <button class="md:hidden text-black block p-2" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
+        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="index.html" class="font-light">Inicio</a>
+        <a href="portafolio.html" class="font-light">Portafolio</a>
+        <a href="sobre-mi.html" class="font-light">Sobre mí</a>
+        <a href="contacto.html" class="font-light">Contacto</a>
+    </div>
+
+    <main>
+        <section class="pt-24 reveal active">
+            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-008.jpg" class="hero-image" alt="Conciertos y Eventos - Kevin Puelles">
+        </section>
+
+        <section class="px-6 max-w-7xl mx-auto py-24 md:py-32">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-8 reveal active">
+                    <h1 class="font-roboto-black text-5xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
+                        Conciertos <br> y Eventos
+                    </h1>
+                    <p class="text-xl md:text-2xl font-light text-zinc-600 leading-relaxed italic">
+                        "Emocionante registro permanente a conciertos y eventos en los que se han presentado artistas de gran alcance nacional e internacional como Yarita Lizeth, Amaranta, Surandino, Dulce Alegría y otros."
+                    </p>
+                </div>
+                
+                <div class="lg:col-span-4 reveal active">
+                    <div class="space-y-8 pt-4">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Periodo</span>
+                            <p class="text-sm font-medium">Permanente</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Cargo</span>
+                            <p class="text-sm font-medium">Fotógrafo</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Localización</span>
+                            <p class="text-sm font-medium">Perú</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-bold block mb-2">Formato</span>
+                            <p class="text-sm font-medium">Digital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 max-w-4xl mx-auto pb-24 text-center">
+            <div class="reveal active">
+                <p class="text-lg md:text-xl text-zinc-500 font-light leading-relaxed">
+                    Con la cámara siempre lista para retratar los mejores momentos de los conciertos y eventos, he acompañado diferentes presentaciones de artistas, principalmente durante fiestas patronales en el ande peruano.
+                </p>
+            </div>
+        </section>
+
+        <section class="px-6 max-w-[1800px] mx-auto pb-32">
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-006.jpg" class="gallery-img" alt="Registro 006"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-010.jpg" class="gallery-img" alt="Registro 010"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-001.jpg" class="gallery-img" alt="Registro 001"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-004.jpg" class="gallery-img" alt="Registro 004"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-009.jpg" class="gallery-img" alt="Registro 009"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-007.jpg" class="gallery-img" alt="Registro 007"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-002.jpg" class="gallery-img" alt="Registro 002"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-005.jpg" class="gallery-img" alt="Registro 005"></div>
+                <div class="reveal"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-003.jpg" class="gallery-img" alt="Registro 003"></div>
+
+            </div>
+        </section>
+
+        <section class="px-6 py-24 border-t border-zinc-100 max-w-[1800px] mx-auto">
+            <div class="flex justify-between items-center reveal">
+                <a href="portafolio.html" class="text-[11px] uppercase tracking-[0.4em] font-bold flex items-center gap-4 hover:text-zinc-400 transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al portafolio
+                </a>
+                <a href="contacto.html" class="text-[11px] uppercase tracking-[0.4em] font-bold flex items-center gap-4 hover:text-zinc-400 transition">
+                    Cotizar evento <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 text-center px-6 bg-black text-zinc-600">
+        <p class="text-[9px] tracking-[0.5em] uppercase">
+            © 2026 Kevin Puelles — Mirar con respeto, narrar con transparencia.
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function toggleMenu() {
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.toggle('hidden');
+            overlay.classList.toggle('flex');
+            document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
+        }
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                let windowHeight = window.innerHeight;
+                let elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) el.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
