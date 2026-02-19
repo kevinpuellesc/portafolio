@@ -24,7 +24,7 @@
             display: none; 
             position: fixed; 
             inset: 0; 
-            background: #fff; 
+            background: #000; /* Fondo negro para resaltar la foto y las flechas blancas */
             z-index: 200; 
             flex-direction: column;
             align-items: center; 
@@ -45,7 +45,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 15px;
+            padding: 0 10px;
         }
 
         .slide img {
@@ -55,39 +55,39 @@
             pointer-events: none;
         }
 
-        /* Flechas Minimalistas y Discretas */
+        /* Flechas Minimalistas Blancas con Opacidad */
         .nav-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(0, 0, 0, 0.2); /* Muy tenue por defecto */
+            color: rgba(255, 255, 255, 0.4); /* Blanco sutil */
             transition: all 0.3s ease;
             z-index: 220;
-            padding: 10px;
+            padding: 15px;
         }
         
         @media (min-width: 768px) {
-            .nav-btn:hover { color: rgba(0, 0, 0, 1); }
+            .nav-btn:hover { color: rgba(255, 255, 255, 1); scale: 1.1; }
         }
 
         @media (max-width: 768px) {
-            .nav-btn { color: rgba(0, 0, 0, 0.15); } /* Aún más discreto en móvil */
-            #prev-btn { left: 5px; }
-            #next-btn { right: 5px; }
+            .nav-btn { color: rgba(255, 255, 255, 0.5); } /* Un poco más de brillo en móvil */
+            #prev-btn { left: 0px; }
+            #next-btn { right: 0px; }
         }
 
-        #prev-btn { left: 20px; }
-        #next-btn { right: 20px; }
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
         
         #close-btn { 
             position: absolute; 
-            top: 20px; 
-            right: 20px; 
+            top: 25px; 
+            right: 25px; 
             z-index: 230; 
-            color: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.5);
             transition: color 0.3s;
         }
-        #close-btn:hover { color: #000; }
+        #close-btn:hover { color: #fff; }
 
         #mobile-overlay.hidden { display: none; }
     </style>
@@ -108,13 +108,9 @@
     </nav>
 
     <div id="lightbox">
-        <button id="close-btn" onclick="closeLightbox()"><i data-lucide="x" class="w-6 h-6"></i></button>
-        
+        <button id="close-btn" onclick="closeLightbox()"><i data-lucide="x" class="w-8 h-8"></i></button>
         <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)"><i data-lucide="chevron-left" class="w-10 h-10"></i></button>
-        
-        <div id="slider" class="slider-container">
-            </div>
-        
+        <div id="slider" class="slider-container"></div>
         <button id="next-btn" class="nav-btn" onclick="changeImage(1)"><i data-lucide="chevron-right" class="w-10 h-10"></i></button>
     </div>
 
@@ -123,7 +119,7 @@
             <div class="reveal active">
                 <h1 class="font-roboto-black text-5xl md:text-8xl uppercase tracking-tighter leading-none mb-8">Conciertos y Eventos</h1>
                 <p class="text-xl md:text-3xl font-light leading-snug max-w-4xl text-zinc-600 mb-12">
-                    Emocionante registro permanente a conciertos y eventos...
+                    Emocionante registro permanente a conciertos y eventos en los que se han presentado artistas de gran alcance nacional e internacional.
                 </p>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t border-zinc-200 text-[13px]">
@@ -158,10 +154,6 @@
         </section>
     </main>
 
-    <footer class="py-10 text-center px-6 border-t border-zinc-50 bg-white text-zinc-300">
-        <p class="text-[9px] tracking-[0.5em] uppercase">© 2026 Kevin Puelles</p>
-    </footer>
-
     <script>
         lucide.createIcons();
         let currentIdx = 0;
@@ -172,17 +164,15 @@
         imgs.forEach((img, i) => {
             const slide = document.createElement('div');
             slide.className = 'slide';
-            slide.innerHTML = `<img src="${img.src}" alt="img-${i}">`;
+            slide.innerHTML = `<img src="${img.src}">`;
             slider.appendChild(slide);
-            img.parentElement.onclick = () => openLightbox(i);
+            img.parentElement.onclick = () => {
+                currentIdx = i;
+                updateSlider(false);
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            };
         });
-
-        function openLightbox(i) {
-            currentIdx = i;
-            updateSlider(false);
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
 
         function closeLightbox() {
             lightbox.style.display = 'none';
@@ -202,11 +192,9 @@
         }
 
         let touchStartX = 0;
-        let touchEndX = 0;
         lightbox.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
         lightbox.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
+            const diff = touchStartX - e.changedTouches[0].screenX;
             if (Math.abs(diff) > 40) diff > 0 ? changeImage(1) : changeImage(-1);
         });
 
