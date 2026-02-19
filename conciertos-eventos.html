@@ -20,37 +20,67 @@
         .masonry-item { break-inside: avoid; margin-bottom: 1rem; width: 100%; cursor: pointer; transition: opacity 0.3s; }
         .masonry-item:hover { opacity: 0.85; }
 
-        /* Lightbox Mejorado */
+        /* Lightbox con Slider */
         #lightbox { 
             display: none; 
             position: fixed; 
             inset: 0; 
-            background: rgba(255,255,255,0.98); 
+            background: #fff; 
             z-index: 200; 
+            flex-direction: column;
             align-items: center; 
             justify-content: center; 
         }
-        #lightbox img { 
-            max-width: 90%; 
-            max-height: 85vh; 
-            object-fit: contain; 
-            user-select: none;
+
+        .slider-container {
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
         }
 
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            user-select: none;
+            pointer-events: none; /* Evita que el arrastre de imagen interfiera */
+        }
+
+        /* Botones de navegación mejorados */
         .nav-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 12px;
             color: #000;
-            cursor: pointer;
-            transition: opacity 0.3s;
-            z-index: 210;
+            z-index: 220;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .nav-btn:hover { opacity: 0.5; }
-        #prev-btn { left: 10px; }
-        #next-btn { right: 10px; }
-        #close-btn { position: absolute; top: 20px; right: 20px; z-index: 220; }
+        
+        @media (max-width: 768px) {
+            .nav-btn { padding: 8px; background: rgba(255, 255, 255, 0.9); }
+            .nav-btn i { width: 24px; height: 24px; }
+        }
+
+        #prev-btn { left: 20px; }
+        #next-btn { right: 20px; }
+        #close-btn { position: absolute; top: 20px; right: 20px; z-index: 230; padding: 10px; }
 
         #mobile-overlay.hidden { display: none; }
     </style>
@@ -66,80 +96,43 @@
                 <a href="sobre-mi.html" class="hover:text-black transition">Sobre mí</a>
                 <a href="contacto.html" class="hover:text-black transition">Contacto</a>
             </div>
-            <button class="md:hidden text-black block p-2" onclick="toggleMenu()">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
+            <button class="md:hidden text-black block p-2" onclick="toggleMenu()"><i data-lucide="menu" class="w-6 h-6"></i></button>
         </div>
     </nav>
 
-    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
-        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <a href="index.html" class="font-light">Inicio</a>
-        <a href="portafolio.html" class="font-light">Portafolio</a>
-        <a href="sobre-mi.html" class="font-light">Sobre mí</a>
-        <a href="contacto.html" class="font-light">Contacto</a>
-    </div>
-
     <div id="lightbox">
-        <button id="close-btn" onclick="closeLightbox()" class="text-black"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <button id="close-btn" onclick="closeLightbox()"><i data-lucide="x" class="w-8 h-8"></i></button>
         
-        <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)">
-            <i data-lucide="chevron-left" class="w-10 h-10"></i>
-        </button>
+        <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)"><i data-lucide="chevron-left" class="w-8 h-8"></i></button>
         
-        <img id="lightbox-img" src="" alt="Zoom">
+        <div id="slider" class="slider-container">
+            </div>
         
-        <button id="next-btn" class="nav-btn" onclick="changeImage(1)">
-            <i data-lucide="chevron-right" class="w-10 h-10"></i>
-        </button>
+        <button id="next-btn" class="nav-btn" onclick="changeImage(1)"><i data-lucide="chevron-right" class="w-8 h-8"></i></button>
     </div>
 
     <main class="pt-32 md:pt-48">
-        
         <section class="px-6 max-w-7xl mx-auto mb-10 md:mb-16">
             <div class="reveal active">
-                <h1 class="font-roboto-black text-5xl md:text-8xl uppercase tracking-tighter leading-none mb-8 break-words">
-                    Conciertos y Eventos
-                </h1>
+                <h1 class="font-roboto-black text-5xl md:text-8xl uppercase tracking-tighter leading-none mb-8">Conciertos y Eventos</h1>
                 <p class="text-xl md:text-3xl font-light leading-snug max-w-4xl text-zinc-600 mb-12">
-                    Emocionante registro permanente a conciertos y eventos en los que se han presentado artistas de gran alcance nacional e internacional como Yarita Lizeth, Amaranta, Surandino, Dulce Alegría y otros.
+                    Emocionante registro permanente a conciertos y eventos...
                 </p>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t border-zinc-200">
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Cargo</span>
-                        <span class="text-sm font-medium">Fotógrafo</span>
-                    </div>
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Localización</span>
-                        <span class="text-sm font-medium">Perú</span>
-                    </div>
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Periodo</span>
-                        <span class="text-sm font-medium">Permanente</span>
-                    </div>
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Formato</span>
-                        <span class="text-sm font-medium">Digital</span>
-                    </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t border-zinc-200 text-[13px]">
+                    <div><span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Cargo</span><span class="font-medium">Fotógrafo</span></div>
+                    <div><span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Localización</span><span class="font-medium">Perú</span></div>
+                    <div><span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Periodo</span><span class="font-medium">Permanente</span></div>
+                    <div><span class="block text-[10px] uppercase tracking-widest text-zinc-400 mb-1">Formato</span><span class="font-medium">Digital</span></div>
                 </div>
             </div>
         </section>
 
         <section class="mb-12 md:mb-20">
-            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-008.jpg" 
-                 class="w-full h-auto reveal" alt="Imagen Principal">
+            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-008.jpg" class="w-full h-auto reveal" alt="Hero">
         </section>
 
-        <section class="px-6 max-w-7xl mx-auto mb-12 md:mb-20">
-            <div class="mb-8 md:mb-12 max-w-5xl">
-                <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600 reveal">
-                    Con la cámara siempre lista para retratar los mejores momentos de los conciertos y eventos, he acompañado diferentes presentaciones de artistas, principalmente durante fiestas patronales en el ande peruano.
-                </p>
-            </div>
-            
+        <section class="px-6 max-w-7xl mx-auto mb-12">
             <div class="masonry reveal">
                 <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-006.jpg" class="gallery-src"></div>
                 <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/conciertosyeventos-010.jpg" class="gallery-src"></div>
@@ -153,37 +146,31 @@
             </div>
         </section>
 
-        <section class="px-6 max-w-7xl mx-auto mb-16 md:mb-24">
-            <div class="text-center pt-10 pb-16 border-t border-zinc-100 reveal">
-                <a href="contacto.html" class="inline-block bg-black text-white text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-800 transition-all w-full md:w-auto">
-                    ¿Quieres documentar una historia? Escríbeme.
-                </a>
-            </div>
+        <section class="px-6 max-w-7xl mx-auto py-24 border-t border-zinc-100 text-center">
+            <a href="contacto.html" class="inline-block bg-black text-white text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-800 transition-all w-full md:w-auto">¿Quieres documentar una historia? Escríbeme.</a>
         </section>
-
     </main>
-
-    <footer class="py-10 text-center px-6 border-t border-zinc-50 bg-white text-zinc-300">
-        <p class="text-[9px] tracking-[0.5em] uppercase">© 2026 Kevin Puelles</p>
-    </footer>
 
     <script>
         lucide.createIcons();
 
-        // Lógica de Galería con Navegación
-        let currentImgIndex = 0;
-        const images = Array.from(document.querySelectorAll('.gallery-src'));
+        let currentIdx = 0;
+        const imgs = Array.from(document.querySelectorAll('.gallery-src'));
+        const slider = document.getElementById('slider');
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
 
-        // Asignar evento click a cada imagen del grid
-        images.forEach((img, index) => {
-            img.parentElement.onclick = () => openLightbox(index);
+        // Cargar imágenes en el slider una sola vez
+        imgs.forEach((img, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.innerHTML = `<img src="${img.src}" alt="img-${i}">`;
+            slider.appendChild(slide);
+            img.parentElement.onclick = () => openLightbox(i);
         });
 
-        function openLightbox(index) {
-            currentImgIndex = index;
-            lightboxImg.src = images[currentImgIndex].src;
+        function openLightbox(i) {
+            currentIdx = i;
+            updateSlider(false);
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
@@ -193,15 +180,38 @@
             document.body.style.overflow = 'auto';
         }
 
-        function changeImage(direction) {
-            currentImgIndex += direction;
-            if (currentImgIndex >= images.length) currentImgIndex = 0;
-            if (currentImgIndex < 0) currentImgIndex = images.length - 1;
-            lightboxImg.src = images[currentImgIndex].src;
+        function changeImage(dir) {
+            currentIdx += dir;
+            if (currentIdx >= imgs.length) currentIdx = 0;
+            if (currentIdx < 0) currentIdx = imgs.length - 1;
+            updateSlider(true);
         }
 
-        // Navegación por teclado
-        document.addEventListener('keydown', (e) => {
+        function updateSlider(animate) {
+            slider.style.transition = animate ? "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)" : "none";
+            slider.style.transform = `translateX(-${currentIdx * 100}%)`;
+        }
+
+        // Lógica de Swipe (Deslizar)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        lightbox.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) { // Umbral de 50px para evitar toques accidentales
+                if (diff > 0) changeImage(1); // Swipe izquierda -> Siguiente
+                else changeImage(-1); // Swipe derecha -> Anterior
+            }
+        }
+
+        // Teclado
+        document.addEventListener('keydown', e => {
             if (lightbox.style.display === 'flex') {
                 if (e.key === 'ArrowRight') changeImage(1);
                 if (e.key === 'ArrowLeft') changeImage(-1);
@@ -210,21 +220,16 @@
         });
 
         function toggleMenu() {
-            const overlay = document.getElementById('mobile-overlay');
+            const overlay = document.querySelector('#mobile-overlay');
             overlay.classList.toggle('hidden');
             overlay.classList.toggle('flex');
         }
 
-        function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
-                let windowHeight = window.innerHeight;
-                let elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) el.classList.add("active");
+        window.addEventListener("scroll", () => {
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
+        });
     </script>
 </body>
 </html>
