@@ -20,9 +20,73 @@
         .masonry-item { break-inside: avoid; margin-bottom: 1rem; width: 100%; cursor: pointer; transition: opacity 0.3s; }
         .masonry-item:hover { opacity: 0.85; }
 
-        /* Lightbox */
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.98); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
-        #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+        /* Lightbox Slider Minimalista */
+        #lightbox { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: #000; 
+            z-index: 200; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .slider-container {
+            width: 100%;
+            height: 85vh;
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        /* Flechas Blancas Minimalistas */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4); 
+            transition: all 0.3s ease;
+            z-index: 220;
+            padding: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-btn:hover { color: rgba(255, 255, 255, 1); scale: 1.1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-btn { color: rgba(255, 255, 255, 0.5); }
+            #prev-btn { left: 0px; }
+            #next-btn { right: 0px; }
+        }
+
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
+        
+        #close-btn { 
+            position: absolute; 
+            top: 25px; 
+            right: 25px; 
+            z-index: 230; 
+            color: rgba(255, 255, 255, 0.5);
+        }
 
         #mobile-overlay.hidden { display: none; }
     </style>
@@ -54,9 +118,11 @@
         <a href="contacto.html" class="font-light">Contacto</a>
     </div>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <button class="absolute top-8 right-8 text-black"><i data-lucide="x" class="w-8 h-8"></i></button>
-        <img id="lightbox-img" src="" alt="Zoom">
+    <div id="lightbox">
+        <button id="close-btn" onclick="closeLightbox()"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)"><i data-lucide="chevron-left" class="w-10 h-10"></i></button>
+        <div id="slider" class="slider-container"></div>
+        <button id="next-btn" class="nav-btn" onclick="changeImage(1)"><i data-lucide="chevron-right" class="w-10 h-10"></i></button>
     </div>
 
     <main class="pt-32 md:pt-48">
@@ -92,69 +158,69 @@
         </section>
 
         <section class="mb-12 md:mb-20 space-y-4 md:space-y-6">
-            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/CompadresChacayan000.jpg" class="w-full h-auto reveal cursor-pointer" onclick="openLightbox(this.src)">
-            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/compadreschacayan-001.jpg" class="w-full h-auto reveal cursor-pointer" onclick="openLightbox(this.src)">
+            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/CompadresChacayan000.jpg" class="w-full h-auto reveal">
+            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/compadreschacayan-001.jpg" class="w-full h-auto reveal">
         </section>
 
         <section class="px-6 max-w-7xl mx-auto mb-12 md:mb-20">
             <div class="mb-8 md:mb-12 max-w-5xl">
                 <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600 reveal">
-                    Todos los años, una semana antes del Carnaval, se celebra en Chacayán la fiesta patronal más grande de toda la quebrada del Chaupihuaranga. Se trata de la Fiesta de Los Compadres o de Los Solteros, una expresión sincrética que combina devoción, alegría y compromiso familiar durante su desarrollo a lo largo de cuatro días intensos.
+                    Todos los años, una semana antes del Carnaval, se celebra en Chacayán la fiesta patronal más grande de toda la quebrada del Chaupihuaranga...
                 </p>
             </div>
             <div class="masonry reveal">
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-002.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-016.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-018.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-032.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-037.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-043.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-048.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-053.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-054.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-062.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-063.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-074.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-002.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-016.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-018.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-032.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-037.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-043.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-048.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-053.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-054.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-062.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-063.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-074.jpg" class="w-full gallery-src"></div>
             </div>
         </section>
 
         <section class="px-6 max-w-7xl mx-auto mb-12 md:mb-20">
             <div class="mb-8 md:mb-12 max-w-5xl">
                 <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600 reveal">
-                    La Fiesta de Los Compadres llega a convocar a miles de visitantes y se hace más grande cada año gracias a la competencia existente entre los dos barrios que conforman el pueblo y hacen posible su desarrollo.
+                    La Fiesta de Los Compadres llega a convocar a miles de visitantes y se hace más grande cada año...
                 </p>
             </div>
             <div class="masonry reveal">
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-006.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-007.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-008.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-011.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-013.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-020.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-022.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-024.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-034.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-035.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-046.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-050.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-006.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-007.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-008.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-011.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-013.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-020.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-022.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-024.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-034.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-035.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-046.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-050.jpg" class="w-full gallery-src"></div>
             </div>
         </section>
 
         <section class="px-6 max-w-7xl mx-auto mb-16 md:mb-24">
             <div class="mb-8 md:mb-12 max-w-5xl">
                 <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600 reveal">
-                    Desde 2023, realizo en Chacayán un registro documental fotográfico que se complementa con una etnografía que busca responder preguntas clave sobre la festividad en relación al sincretismo, las estructuras familiares y las motivaciones de los cabecillas que conducen la fiesta.
+                    Desde 2023, realizo en Chacayán un registro documental fotográfico que se complementa con una etnografía...
                 </p>
             </div>
             <div class="masonry reveal mb-16">
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-060.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-065.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-066.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-067.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-071.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-072.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/compadreschacayan-002.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-041.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-060.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-065.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-066.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-067.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-071.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-072.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/compadreschacayan-002.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Acompadreschacayan-041.jpg" class="w-full gallery-src"></div>
             </div>
 
             <div class="text-center pt-10 pb-16 border-t border-zinc-100 reveal">
@@ -175,6 +241,60 @@
     <script>
         lucide.createIcons();
 
+        let currentIdx = 0;
+        const imgs = Array.from(document.querySelectorAll('.gallery-src'));
+        const slider = document.getElementById('slider');
+        const lightbox = document.getElementById('lightbox');
+
+        // Inicializar Slider
+        imgs.forEach((img, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.innerHTML = `<img src="${img.src}">`;
+            slider.appendChild(slide);
+            
+            img.parentElement.onclick = () => {
+                currentIdx = i;
+                updateSlider(false);
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            };
+        });
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(dir) {
+            currentIdx += dir;
+            if (currentIdx >= imgs.length) currentIdx = 0;
+            if (currentIdx < 0) currentIdx = imgs.length - 1;
+            updateSlider(true);
+        }
+
+        function updateSlider(animate) {
+            slider.style.transition = animate ? "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)" : "none";
+            slider.style.transform = `translateX(-${currentIdx * 100}%)`;
+        }
+
+        // Touch swipe
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        lightbox.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 40) diff > 0 ? changeImage(1) : changeImage(-1);
+        });
+
+        // Keyboard
+        document.addEventListener('keydown', e => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'ArrowRight') changeImage(1);
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
             overlay.classList.toggle('hidden');
@@ -182,25 +302,9 @@
             document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
         }
 
-        function openLightbox(src) {
-            const lb = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lb.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
         function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
-                let windowHeight = window.innerHeight;
-                let elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) el.classList.add("active");
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
         }
         window.addEventListener("scroll", reveal);
