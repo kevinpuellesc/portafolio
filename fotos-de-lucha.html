@@ -17,11 +17,76 @@
         /* Masonry Grid */
         .masonry { column-count: 2; column-gap: 1rem; }
         @media (min-width: 768px) { .masonry { column-count: 3; column-gap: 1.5rem; } }
-        .masonry-item { break-inside: avoid; margin-bottom: 1rem; width: 100%; cursor: pointer; }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; width: 100%; cursor: pointer; transition: opacity 0.3s; }
+        .masonry-item:hover { opacity: 0.85; }
 
-        /* Lightbox Style */
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.98); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
-        #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+        /* Lightbox Slider Minimalista */
+        #lightbox { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: #000; 
+            z-index: 200; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .slider-container {
+            width: 100%;
+            height: 85vh;
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        /* Flechas Blancas Minimalistas */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4); 
+            transition: all 0.3s ease;
+            z-index: 220;
+            padding: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-btn:hover { color: rgba(255, 255, 255, 1); scale: 1.1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-btn { color: rgba(255, 255, 255, 0.5); }
+            #prev-btn { left: 0px; }
+            #next-btn { right: 0px; }
+        }
+
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
+        
+        #close-btn { 
+            position: absolute; 
+            top: 25px; 
+            right: 25px; 
+            z-index: 230; 
+            color: rgba(255, 255, 255, 0.5);
+        }
 
         #mobile-overlay.hidden { display: none; }
     </style>
@@ -43,22 +108,16 @@
         </div>
     </nav>
 
-    <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
-        <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <a href="index.html" class="font-light">Inicio</a>
-        <a href="portafolio.html" class="font-light">Portafolio</a>
-        <a href="sobre-mi.html" class="font-light">Sobre mí</a>
-        <a href="contacto.html" class="font-light">Contacto</a>
+    <div id="lightbox">
+        <button id="close-btn" onclick="closeLightbox()"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)"><i data-lucide="chevron-left" class="w-10 h-10"></i></button>
+        <div id="slider" class="slider-container">
+            </div>
+        <button id="next-btn" class="nav-btn" onclick="changeImage(1)"><i data-lucide="chevron-right" class="w-10 h-10"></i></button>
     </div>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <button class="absolute top-8 right-8 text-black"><i data-lucide="x" class="w-8 h-8"></i></button>
-        <img id="lightbox-img" src="" alt="Zoom">
-    </div>
-
-    <main class="pt-32 md:pt-48 pb-0"> <section class="px-6 max-w-7xl mx-auto mb-10 md:mb-16">
+    <main class="pt-32 md:pt-48 pb-0"> 
+        <section class="px-6 max-w-7xl mx-auto mb-10 md:mb-16">
             <div class="reveal active">
                 <h1 class="font-roboto-black text-5xl md:text-9xl uppercase tracking-tighter leading-none mb-8 break-words">
                     FotosDeLucha
@@ -89,29 +148,29 @@
         </section>
 
         <section class="mb-12 md:mb-20 space-y-4 md:space-y-6">
-            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-011.jpg" class="w-full h-auto reveal cursor-pointer" onclick="openLightbox(this.src)">
-            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-018.jpg" class="w-full h-auto reveal cursor-pointer" onclick="openLightbox(this.src)">
+            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-011.jpg" class="w-full h-auto reveal">
+            <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-018.jpg" class="w-full h-auto reveal">
         </section>
 
         <section class="px-6 max-w-7xl mx-auto mb-12 md:mb-20">
             <div class="mb-8 md:mb-12 max-w-5xl">
                 <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600 reveal">
-                    Vía la iniciativa <span class="text-black font-semibold">FotosDeLucha</span> y gracias a un trabajo permanente con mi equipo, he fotografiado el proceso de movilización y protesta en el Perú desde diciembre de 2022 hasta la fecha en diferentes regiones del país, entre las que se cuentan Ayacucho, Apurímac, Cusco, Puno, Arequipa, Cajamarca, La Libertad y Lima, construyendo así un testimonio visual que preserva la memoria de la voluntad colectiva.
+                    Vía la iniciativa <span class="text-black font-semibold">FotosDeLucha</span> y gracias a un trabajo permanente con mi equipo, he fotografiado el proceso de movilización y protesta en el Perú...
                 </p>
             </div>
 
             <div class="masonry reveal">
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotosdelucha-020.webp" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-010.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-013.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotosdelucha-009.webp" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-001.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-002.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-004.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-007.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-017.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-020.webp" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-009.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotosdelucha-020.webp" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-010.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-013.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotosdelucha-009.webp" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-001.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-002.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-004.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-007.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-017.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-020.webp" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/portfolio-009.jpg" class="w-full gallery-src"></div>
             </div>
         </section>
 
@@ -119,11 +178,11 @@
             <div class="px-6 max-w-7xl mx-auto">
                 <div class="max-w-5xl mb-12 reveal">
                     <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600">
-                        Con un archivo de más de 500 días de registro en 31 provincias del país, se publicó un fotolibro de mi autoría homónimo a la iniciativa que contiene más de un centenar de imágenes y textos traducidos en cuatro idiomas, que se agotó rápidamente y que planeo continuar en un segundo volumen.
+                        Con un archivo de más de 500 días de registro... se publicó un fotolibro de mi autoría homónimo a la iniciativa...
                     </p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 reveal">
-                    <img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotolibro-fotosdelucha.jpg" class="w-full shadow-xl cursor-pointer" onclick="openLightbox(this.src)">
+                    <div class="cursor-pointer"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotolibro-fotosdelucha.jpg" class="w-full shadow-xl gallery-src"></div>
                     <video class="w-full shadow-xl" autoplay muted loop playsinline>
                         <source src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/Fotolibro-fotos-de-lucha.mp4" type="video/mp4">
                     </video>
@@ -134,27 +193,27 @@
         <section class="px-6 max-w-7xl mx-auto mb-10 md:mb-16">
             <div class="max-w-5xl mb-8 md:mb-12">
                 <p class="text-lg md:text-2xl font-light leading-relaxed text-zinc-600 reveal">
-                    Durante los viajes también se han realizado exposiciones callejeras y en galería en coordinación con asociaciones culturales, locales y comunitarias; al igual que múltiples talleres sobre fotografía dirigidos a jóvenes y estudiantes, con quienes se robustece la discusión académica sobre el trabajo que se desarrolla en FotosDeLucha.
+                    Durante los viajes también se han realizado exposiciones callejeras y en galería...
                 </p>
             </div>
 
             <div class="masonry reveal mb-16">
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-001.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-003.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-006.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-007.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-008.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-011.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-012.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-013.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
-                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-014.jpg" class="w-full" onclick="openLightbox(this.src)"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-001.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-003.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-006.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-007.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-008.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-011.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-012.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-013.jpg" class="w-full gallery-src"></div>
+                <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/expotalleres-014.jpg" class="w-full gallery-src"></div>
             </div>
+        </section>
 
-            <div class="text-center pt-10 pb-16 border-t border-zinc-100 reveal">
-                <a href="contacto.html" class="inline-block bg-black text-white text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-800 transition-all w-full md:w-auto">
-                    ¿Tienes una idea? Escríbeme.
-                </a>
-            </div>
+        <section class="px-6 max-w-7xl mx-auto py-24 border-t border-zinc-100 text-center">
+            <a href="contacto.html" class="inline-block bg-black text-white text-[11px] uppercase tracking-[0.4em] font-bold px-12 py-5 hover:bg-zinc-800 transition-all w-full md:w-auto">
+                ¿Tienes una idea? Escríbeme.
+            </a>
         </section>
 
     </main>
@@ -168,6 +227,67 @@
     <script>
         lucide.createIcons();
 
+        let currentIdx = 0;
+        const imgs = Array.from(document.querySelectorAll('.gallery-src'));
+        const slider = document.getElementById('slider');
+        const lightbox = document.getElementById('lightbox');
+
+        // Generamos el slider basado en las imágenes marcadas
+        imgs.forEach((img, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.innerHTML = `<img src="${img.src}">`;
+            slider.appendChild(slide);
+            
+            // Reemplazamos el onclick previo
+            img.parentElement.onclick = () => openLightbox(i);
+            // Por si la imagen no tiene parent masonry-item (como la del fotolibro)
+            if(!img.parentElement.classList.contains('masonry-item')) {
+                img.onclick = () => openLightbox(i);
+            }
+        });
+
+        function openLightbox(i) {
+            currentIdx = i;
+            updateSlider(false);
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(dir) {
+            currentIdx += dir;
+            if (currentIdx >= imgs.length) currentIdx = 0;
+            if (currentIdx < 0) currentIdx = imgs.length - 1;
+            updateSlider(true);
+        }
+
+        function updateSlider(animate) {
+            slider.style.transition = animate ? "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)" : "none";
+            slider.style.transform = `translateX(-${currentIdx * 100}%)`;
+        }
+
+        // Soporte Táctil (Swipe)
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        lightbox.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 40) diff > 0 ? changeImage(1) : changeImage(-1);
+        });
+
+        // Teclado
+        document.addEventListener('keydown', e => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'ArrowRight') changeImage(1);
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
         function toggleMenu() {
             const overlay = document.getElementById('mobile-overlay');
             overlay.classList.toggle('hidden');
@@ -175,25 +295,9 @@
             document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden';
         }
 
-        function openLightbox(src) {
-            const lb = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lb.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
         function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
-                let windowHeight = window.innerHeight;
-                let elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) el.classList.add("active");
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
             });
         }
         window.addEventListener("scroll", reveal);
@@ -201,4 +305,3 @@
     </script>
 </body>
 </html>
-
