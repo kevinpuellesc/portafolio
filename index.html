@@ -15,10 +15,9 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .hero-bg {
-            /* Cambio 1: Nueva foto principal */
             background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://raw.githubusercontent.com/kevinpuellesc/portafolio/refs/heads/main/img/optimizada_IMG_9738.jpg');
             background-size: cover;
-            background-position: center 35%; /* Ajustado para mejor encuadre del sujeto */
+            background-position: center 35%;
             height: 100vh;
             height: 100dvh;
         }
@@ -57,16 +56,15 @@
         <a href="contacto.html" class="font-light">Contacto</a>
     </div>
 
-    <header class="hero-bg flex items-end md:items-center justify-center text-center px-6 pb-24 md:pb-0">
-        <!-- Contenedor con mt-08 para bajar el bloque del título -->
-        <div class="reveal active w-full mt-08">
+    <header class="hero-bg flex items-center justify-center text-center px-6 pt-40 md:pt-0">
+        <div class="reveal active w-full">
             <h1 class="font-roboto-black text-4xl md:text-7xl uppercase tracking-tighter leading-tight text-white drop-shadow-2xl">
                 Retratando <br class="hidden md:block"> el presente
             </h1>
             <p class="mt-6 text-white/100 text-[10px] md:text-xs uppercase tracking-[0.4em] font-medium">
                 Fotografía con emoción
             </p>
-            <div class="mt-06 md:mt-08">
+            <div class="mt-8">
                 <a href="#featured" class="inline-block p-3 md:p-4 border border-white/40 rounded-full text-white hover:bg-white hover:text-black transition-all">
                     <i data-lucide="arrow-down" class="w-5 h-5 md:w-6 md:h-6 animate-bounce"></i>
                 </a>
