@@ -17,26 +17,15 @@
         #mobile-overlay.hidden { display: none; }
         #mobile-overlay.flex { display: flex; }
 
-        .masonry-container {
-            column-count: 2;
-            column-gap: 1rem;
-        }
-        @media (min-width: 768px) {
-            .masonry-container {
-                column-count: 3;
-                column-gap: 1.5rem;
-            }
-        }
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1rem;
-            width: 100%;
-        }
-        @media (min-width: 768px) {
-            .masonry-item {
-                margin-bottom: 1.5rem;
-            }
-        }
+        .masonry-container { column-count: 2; column-gap: 1rem; }
+        @media (min-width: 768px) { .masonry-container { column-count: 3; column-gap: 1.5rem; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; width: 100%; cursor: zoom-in; }
+        @media (min-width: 768px) { .masonry-item { margin-bottom: 1.5rem; } }
+
+        /* Estilos Lightbox */
+        #lightbox { display: none; position: fixed; z-index: 200; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; cursor: zoom-out; }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
     </style>
 </head>
 <body class="text-zinc-900 overflow-x-hidden">
@@ -55,6 +44,13 @@
             </button>
         </div>
     </nav>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white p-2">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Vista ampliada">
+    </div>
 
     <div id="mobile-overlay" class="fixed inset-0 bg-white z-[150] flex-col items-center justify-center space-y-8 text-xl uppercase tracking-widest hidden">
         <button class="absolute top-6 right-6 text-black p-2" onclick="toggleMenu()" id="btn-close">
@@ -107,12 +103,12 @@
                 </div>
 
                 <div class="masonry-container">
-                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/467604166_1473506423320072_8150217774243246732_n.jpeg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
-                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/476637521_588807050793002_1827828300874394390_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
-                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/483301875_18485743294015236_8650607519880300834_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
-                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/476640760_588807397459634_6791336341217412239_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
-                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/477582153_588807244126316_3648799548505928662_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
-                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/475647277_579496328390741_1987546194500993357_n.jpg" class="w-full hover:scale-[1.02] transition-all duration-700"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/467604166_1473506423320072_8150217774243246732_n.jpeg" onclick="openLightbox(this.src)" class="w-full hover:scale-[1.02] transition-all duration-700 cursor-pointer"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/476637521_588807050793002_1827828300874394390_n.jpg" onclick="openLightbox(this.src)" class="w-full hover:scale-[1.02] transition-all duration-700 cursor-pointer"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/483301875_18485743294015236_8650607519880300834_n.jpg" onclick="openLightbox(this.src)" class="w-full hover:scale-[1.02] transition-all duration-700 cursor-pointer"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/476640760_588807397459634_6791336341217412239_n.jpg" onclick="openLightbox(this.src)" class="w-full hover:scale-[1.02] transition-all duration-700 cursor-pointer"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/477582153_588807244126316_3648799548505928662_n.jpg" onclick="openLightbox(this.src)" class="w-full hover:scale-[1.02] transition-all duration-700 cursor-pointer"></div>
+                    <div class="masonry-item"><img src="https://raw.githubusercontent.com/kevinpuellesc/portafolio/main/img/475647277_579496328390741_1987546194500993357_n.jpg" onclick="openLightbox(this.src)" class="w-full hover:scale-[1.02] transition-all duration-700 cursor-pointer"></div>
                 </div>
             </div>
         </section>
@@ -147,6 +143,21 @@
                 overlay.classList.add('hidden'); overlay.classList.remove('flex');
                 document.body.style.overflow = 'auto';
             }
+        }
+
+        // Lightbox Functions
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         function reveal() {
